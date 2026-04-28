@@ -126,6 +126,24 @@
   },
   "education": {
     "items": {
+      "formacao-eng-software-alura": {
+        "title": "Software Engineering track — earned certificates",
+        "institution": "Alura",
+        "period": "2024 — 2025",
+        "details": [
+          "Microservices: Design Patterns — completed on June 27, 2024",
+          "Microservices: Exploring the Concepts — completed on July 12, 2024",
+          "Microservices in Practice: Understanding Decision-Making — completed on July 25, 2024",
+          "Continuous Integration: More Quality and Less Risk in Development — completed on October 25, 2024",
+          "Scrum: Agility in Your Project — completed on December 29, 2024",
+          "Continuous Delivery: Reliability and Quality in Software Deployment — completed on December 12, 2024",
+          "Agile Teams: Organizing Roles in a Team — completed on February 10, 2025",
+          "Tech Lead Profession: Understanding Technical Leadership — completed on February 27, 2025",
+          "Quality Assurance: Test Planning and Bug Management — completed on March 5, 2025",
+          "Extreme Programming: Agile Software Development Methodology — completed on March 17, 2025",
+          "Tech Lead: Building Management Practices and Routines — completed on April 26, 2025"
+        ]
+      },
       "pos-arquitetura": {
         "title": "Postgraduate in Software Architecture",
         "institution": "UnyLeya",
@@ -160,6 +178,8 @@
     "title": "Skills",
     "subtitle": "Self-assessed proficiency (1–8), aligned with my résumé.",
     "recentHighlightNote": "Technologies marked in gold are those I’ve worked with most in recent roles.",
+    "showMore": "Show more",
+    "showLess": "Show less",
     "labels": {
       "html-css": "HTML / CSS",
       "js": "JavaScript",
@@ -168,6 +188,17 @@
       "java": "Java",
       "node": "Node.js",
       "react": "React",
+      "unit-testing": "Unit Testing",
+      "e2e-testing": "e2e Testing",
+      "refine-tasks-requirements": "Refine tasks and requirements",
+      "leveraging-ai-tools": "Leveraging AI tools",
+      "nextjs": "Next.js",
+      "nestjs": "Nest.js",
+      "spring-boot": "Spring Boot",
+      "react-native-expo": "React Native (Expo)",
+      "prototype-figma": "Prototype (Figma)",
+      "uml-modeling": "UML modeling",
+      "database-modeling": "Database modeling",
       "angular": "Angular",
       "cloud": "Infra & cloud",
       "docker": "Docker",

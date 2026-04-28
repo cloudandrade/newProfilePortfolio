@@ -1,0 +1,21 @@
+@reference "../../index.css";
+
+.skills-list {
+  @apply max-w-xl;
+}
+
+.skills-more {
+  @apply mt-2;
+}
+
+.skills-toggle-btn {
+  @apply min-h-0 rounded-md px-2.5 py-1 text-xs normal-case;
+}
+
+.skills-extra-list {
+  @apply mt-3;
+}
+
+.skills-note {
+  @apply mt-6 max-w-lg border-l-2 pl-3 leading-relaxed;
+}

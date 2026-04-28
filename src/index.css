@@ -37,25 +37,4 @@
     outline-offset: 3px;
   }
 
-  .skip-link {
-    position: absolute;
-    left: 50%;
-    z-index: 9999;
-    padding: 0.65rem 1.25rem;
-    transform: translate(-50%, -120%);
-    border-radius: 999px;
-    background: #0a0a0b;
-    color: #00f2c3;
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-  }
-
-  .skip-link:focus {
-    transform: translate(-50%, 0.75rem);
-    outline: none;
-    box-shadow: 0 0 0 2px #00f2c3;
-  }
 }

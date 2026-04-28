@@ -1,0 +1,21 @@
+@reference "../../index.css";
+
+.section-root {
+  @apply py-16 md:py-24;
+}
+
+.section-scroll-offset {
+  @apply scroll-mt-[72px];
+}
+
+.section-title {
+  @apply mb-2 bg-clip-text text-transparent;
+}
+
+.section-subtitle {
+  @apply mb-10 max-w-2xl leading-relaxed;
+}
+
+.section-subtitle-spacer {
+  @apply mb-10;
+}

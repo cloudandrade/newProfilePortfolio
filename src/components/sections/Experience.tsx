@@ -5,12 +5,18 @@ import { educationOrder } from '../../data/educationOrder'
 import { experienceOrder, getExperienceMeta } from '../../data/experienceMeta'
 import { Section } from '../layout/Section'
 import { ClientsCarousel } from './ClientsCarousel'
+import './Experience.css'
 
 export function Experience() {
   const { t } = useTranslation()
   const [activeIndex, setActiveIndex] = useState(0)
   const workScrollRef = useRef<HTMLDivElement | null>(null)
   const workItemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const featuredEducationId = 'formacao-eng-software-alura'
+  const highlightedEducationId = 'pos-arquitetura'
+  const compactEducationIds = educationOrder.filter(
+    (id) => id !== featuredEducationId && id !== highlightedEducationId,
+  )
 
   const scrollToIndex = (index: number) => {
     const container = workScrollRef.current
@@ -54,7 +60,7 @@ export function Experience() {
       title={t('experience.title')}
       subtitle={t('experience.subtitle')}
     >
-      <Typography variant="h6" className="mb-6 font-semibold">
+      <Typography variant="h6" className="experience-work-title">
         {t('experience.work')}
       </Typography>
       <Box
@@ -63,7 +69,7 @@ export function Experience() {
           maxWidth: 'min(1240px, calc(100vw - 56px))',
         }}
       >
-        <Box className="mb-4 flex flex-wrap gap-2">
+        <Box className="experience-actions">
           <Button variant="outlined" color="primary" onClick={() => scrollToIndex(0)}>
             {t('experience.scrollToStart')}
           </Button>
@@ -76,8 +82,8 @@ export function Experience() {
           </Button>
         </Box>
 
-        <Box className="relative flex gap-4 md:gap-6">
-          <Box className="relative hidden w-7 md:block" aria-hidden>
+        <Box className="experience-content">
+          <Box className="experience-track-shell" aria-hidden>
             <Box
               sx={{
                 position: 'absolute',
@@ -88,7 +94,7 @@ export function Experience() {
                 bgcolor: 'divider',
               }}
             />
-            <Box className="relative z-[1] flex h-full flex-col items-center justify-between py-2">
+            <Box className="experience-track">
               {experienceOrder.map((id, index) => {
                 const isActive = index === activeIndex
                 return (
@@ -114,7 +120,7 @@ export function Experience() {
 
           <Box
             ref={workScrollRef}
-            className="flex-1 overflow-y-auto px-3"
+            className="experience-scroll"
             sx={{
               maxHeight: 560,
               scrollBehavior: 'smooth',
@@ -146,7 +152,7 @@ export function Experience() {
                   }}
                 >
                   <Box
-                    className="rounded-2xl border px-5 py-5"
+                    className="experience-card"
                     sx={{
                       width: cardWidth,
                       ml: 1,
@@ -170,39 +176,43 @@ export function Experience() {
                       },
                     }}
                   >
-                    <Box className="mb-3 flex flex-wrap items-center gap-3">
+                    <Box className="experience-card-header">
                       {meta?.employerLogoSrc && (
                         <Box
                           component="img"
                           src={meta.employerLogoSrc}
                           alt=""
-                          className="h-8 max-w-[140px] object-contain object-left"
+                          className="experience-logo"
                         />
                       )}
                       <Box>
                         <Typography
                           variant="overline"
                           color="primary"
-                          className="exp-period font-mono tracking-wider"
+                          className="exp-period experience-period"
                         >
                           {t(`experience.items.${id}.period`)}
                         </Typography>
-                        <Typography variant="h6" component="h3" className="exp-role mt-0.5">
+                        <Typography variant="h6" component="h3" className="exp-role experience-role">
                           {t(`experience.items.${id}.role`)}
                         </Typography>
-                        <Typography variant="subtitle2" color="text.secondary" className="exp-company">
+                        <Typography
+                          variant="subtitle2"
+                          color="text.secondary"
+                          className="exp-company experience-company"
+                        >
                           {t(`experience.items.${id}.company`)}
                         </Typography>
                       </Box>
                     </Box>
 
                     {list.length > 0 && (
-                      <Box component="ul" className="m-0 list-none space-y-2 p-0">
+                      <Box component="ul" className="experience-highlights">
                         {list.map((h) => (
                           <Box
                             component="li"
                             key={h}
-                            className="exp-highlight relative pl-4 text-sm leading-relaxed before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-[#00f2c3]/60 before:content-['']"
+                            className="exp-highlight experience-highlight"
                             sx={{ color: 'text.secondary' }}
                           >
                             {h}
@@ -220,46 +230,99 @@ export function Experience() {
 
       <ClientsCarousel />
 
-      <Typography variant="h6" className="mb-6 mt-16 font-semibold">
+      <Typography variant="h6" className="experience-education-title">
         {t('experience.education')}
       </Typography>
-      <Box className="grid max-w-4xl gap-5 md:grid-cols-2">
-        {educationOrder.map((edId) => {
-          const details = t(`education.items.${edId}.details`, { returnObjects: true })
-          const detailList = Array.isArray(details) ? (details as string[]) : []
+      <Box className="experience-education-layout">
+        <Box
+          className="experience-education-card experience-education-card-featured"
+          sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}
+        >
+          <Typography variant="overline" color="primary" className="experience-education-period">
+            {t(`education.items.${featuredEducationId}.period`)}
+          </Typography>
+          <Typography variant="h6" component="h3" className="experience-education-title-item">
+            {t(`education.items.${featuredEducationId}.title`)}
+          </Typography>
+          <Typography variant="subtitle2" color="text.secondary" className="experience-education-institution">
+            {t(`education.items.${featuredEducationId}.institution`)}
+          </Typography>
+          <Box component="ul" className="experience-education-details" sx={{ color: 'text.secondary' }}>
+            {(
+              t(`education.items.${featuredEducationId}.details`, {
+                returnObjects: true,
+              }) as string[]
+            ).map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+          </Box>
+        </Box>
 
-          return (
-            <Box
-              key={edId}
-              className="rounded-xl border p-5 transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(0,242,195,0.15)]"
-              sx={{
-                bgcolor: 'background.paper',
-                borderColor: 'divider',
-              }}
-            >
-              <Typography variant="overline" color="primary" className="font-mono">
-                {t(`education.items.${edId}.period`)}
-              </Typography>
-              <Typography variant="h6" component="h3" className="mt-1 text-lg">
-                {t(`education.items.${edId}.title`)}
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary" className="mb-2">
-                {t(`education.items.${edId}.institution`)}
-              </Typography>
-              {detailList.length > 0 && (
-                <Box
-                  component="ul"
-                  className="m-0 list-disc space-y-1 pl-5 text-sm"
-                  sx={{ color: 'text.secondary' }}
-                >
-                  {detailList.map((d) => (
-                    <li key={d}>{d}</li>
-                  ))}
-                </Box>
-              )}
+        <Box className="experience-education-side">
+          <Box
+            className="experience-education-card experience-education-card-highlighted"
+            sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}
+          >
+            <Typography variant="overline" color="primary" className="experience-education-period">
+              {t(`education.items.${highlightedEducationId}.period`)}
+            </Typography>
+            <Typography variant="h6" component="h3" className="experience-education-title-item">
+              {t(`education.items.${highlightedEducationId}.title`)}
+            </Typography>
+            <Typography variant="subtitle2" color="text.secondary" className="experience-education-institution">
+              {t(`education.items.${highlightedEducationId}.institution`)}
+            </Typography>
+            <Box component="ul" className="experience-education-details" sx={{ color: 'text.secondary' }}>
+              {(
+                t(`education.items.${highlightedEducationId}.details`, {
+                  returnObjects: true,
+                }) as string[]
+              ).map((d) => (
+                <li key={d}>{d}</li>
+              ))}
             </Box>
-          )
-        })}
+          </Box>
+
+          <Box className="experience-education-compact-group">
+            {compactEducationIds.map((edId) => {
+              const details = t(`education.items.${edId}.details`, { returnObjects: true })
+              const detailList = Array.isArray(details) ? (details as string[]) : []
+
+              return (
+                <Box
+                  key={edId}
+                  className="experience-education-card experience-education-card-compact"
+                  sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}
+                >
+                  <Typography variant="overline" color="primary" className="experience-education-period">
+                    {t(`education.items.${edId}.period`)}
+                  </Typography>
+                  <Typography variant="h6" component="h3" className="experience-education-title-item">
+                    {t(`education.items.${edId}.title`)}
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    className="experience-education-institution"
+                  >
+                    {t(`education.items.${edId}.institution`)}
+                  </Typography>
+                  {detailList.length > 0 && (
+                    <Box
+                      component="ul"
+                      className="experience-education-details"
+                      sx={{ color: 'text.secondary' }}
+                    >
+                      {detailList.map((d) => (
+                        <li key={d}>{d}</li>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+              )
+            })}
+          </Box>
+        </Box>
       </Box>
     </Section>
   )

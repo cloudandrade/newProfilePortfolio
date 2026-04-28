@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { skillsScaleMax } from '../../data/skills'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import './SkillBar.css'
 
 const GOLD_GRADIENT = 'linear-gradient(90deg, #e8c170, #d4a24a, #b8892e)'
 const TEAL_GRADIENT = 'linear-gradient(90deg, #00f2c3, #00b896)'
@@ -26,8 +27,8 @@ export function SkillBar({ label, level, highlight, scaleMax = skillsScaleMax }:
     theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)'
 
   return (
-    <Box ref={ref} className="mb-3">
-      <Box className="mb-1 flex items-baseline justify-between gap-2">
+    <Box ref={ref} className="skillbar-root">
+      <Box className="skillbar-header">
         <Typography
           variant="body2"
           sx={{
@@ -40,18 +41,18 @@ export function SkillBar({ label, level, highlight, scaleMax = skillsScaleMax }:
         <Typography
           variant="caption"
           color="text.secondary"
-          className="font-mono"
+          className="skillbar-value"
           sx={highlight ? { color: '#c9954d' } : undefined}
         >
           {level}/{scaleMax}
         </Typography>
       </Box>
       <Box
-        className="h-1.5 w-full overflow-hidden rounded-full"
+        className="skillbar-track"
         sx={{ bgcolor: trackBg }}
       >
         <motion.div
-          className="h-full rounded-full"
+          className="skillbar-progress"
           style={{
             background: highlight ? GOLD_GRADIENT : TEAL_GRADIENT,
             boxShadow: highlight ? '0 0 12px rgba(212, 162, 74, 0.35)' : undefined,

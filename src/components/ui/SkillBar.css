@@ -1,0 +1,21 @@
+@reference "../../index.css";
+
+.skillbar-root {
+  @apply mb-3;
+}
+
+.skillbar-header {
+  @apply mb-1 flex items-baseline justify-between gap-2;
+}
+
+.skillbar-value {
+  @apply font-mono;
+}
+
+.skillbar-track {
+  @apply h-1.5 w-full overflow-hidden rounded-full;
+}
+
+.skillbar-progress {
+  @apply h-full rounded-full;
+}

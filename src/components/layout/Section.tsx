@@ -1,6 +1,7 @@
 import { Box, Container, Typography, useTheme } from '@mui/material'
 import type { ReactNode } from 'react'
 import { AnimatedSection } from '../ui/AnimatedSection'
+import './Section.css'
 
 type Props = {
   id: string
@@ -30,7 +31,7 @@ export function Section({
     <Box
       component="section"
       id={isTitleAnchor ? undefined : id}
-      className={`${isTitleAnchor ? '' : 'scroll-mt-[72px]'} py-16 md:py-24 ${className ?? ''}`}
+      className={`section-root ${isTitleAnchor ? '' : 'section-scroll-offset'} ${className ?? ''}`}
     >
       <Container maxWidth="lg">
         <AnimatedSection>
@@ -38,7 +39,7 @@ export function Section({
             variant="h4"
             component="h2"
             id={isTitleAnchor ? id : undefined}
-            className={`mb-2 bg-clip-text text-transparent ${isTitleAnchor ? 'scroll-mt-[72px]' : ''}`}
+            className={`section-title ${isTitleAnchor ? 'section-scroll-offset' : ''}`}
             sx={{ backgroundImage: titleGradient }}
           >
             {title}
@@ -47,12 +48,12 @@ export function Section({
             <Typography
               variant="body1"
               color="text.secondary"
-              className="mb-10 max-w-2xl leading-relaxed"
+              className="section-subtitle"
             >
               {subtitle}
             </Typography>
           ) : (
-            <Box className="mb-10" />
+            <Box className="section-subtitle-spacer" />
           )}
           {children}
         </AnimatedSection>

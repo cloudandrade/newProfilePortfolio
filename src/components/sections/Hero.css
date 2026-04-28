@@ -1,0 +1,77 @@
+@reference "../../index.css";
+
+.hero-root {
+  @apply relative flex min-h-[100svh] items-center overflow-hidden scroll-mt-[72px];
+}
+
+.hero-bg-layer {
+  @apply pointer-events-none absolute inset-0 -z-10;
+}
+
+.hero-glow {
+  @apply absolute rounded-full blur-[100px];
+}
+
+.hero-glow-top {
+  @apply -top-1/4 right-[-20%] h-[70vmin] w-[70vmin];
+}
+
+.hero-glow-bottom {
+  @apply bottom-[-25%] left-[-25%] h-[65vmin] w-[65vmin];
+}
+
+.hero-grid-overlay {
+  @apply absolute inset-0;
+}
+
+.hero-container {
+  @apply relative z-[1] py-24 md:py-32;
+}
+
+.hero-grid {
+  @apply grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-8;
+}
+
+.hero-content-col {
+  @apply order-2 md:order-1 md:col-span-7;
+}
+
+.hero-eyebrow {
+  @apply font-mono tracking-[0.28em];
+}
+
+.hero-name {
+  @apply mt-2 text-4xl sm:text-5xl md:text-6xl;
+}
+
+.hero-title {
+  @apply mt-3 font-medium;
+}
+
+.hero-objective {
+  @apply mt-6 max-w-xl leading-relaxed;
+}
+
+.hero-actions {
+  @apply mt-8 flex flex-wrap gap-3;
+}
+
+.hero-media-col {
+  @apply order-1 flex justify-center md:order-2 md:col-span-5 md:justify-end;
+}
+
+.hero-card-shell {
+  @apply relative rounded-2xl;
+}
+
+.hero-photo {
+  @apply block h-full w-full rounded-xl object-cover;
+}
+
+.hero-scroll-hint {
+  @apply absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex;
+}
+
+.hero-scroll-hint-text {
+  @apply uppercase tracking-widest;
+}

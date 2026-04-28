@@ -125,6 +125,24 @@
   },
   "education": {
     "items": {
+      "formacao-eng-software-alura": {
+        "title": "Formação Engenharia de Software — certificados obtidos",
+        "institution": "Alura",
+        "period": "2024 — 2025",
+        "details": [
+          "Microserviços: Padrões de Projeto — concluído em 27 de junho de 2024",
+          "Microserviços: Explorando os Conceitos — concluído em 12 de julho de 2024",
+          "Microserviços na Prática: Entendendo a Tomada de Decisões — concluído em 25 de julho de 2024",
+          "Integração Contínua: Mais Qualidade e Menos Risco no Desenvolvimento — concluído em 25 de outubro de 2024",
+          "Scrum: Agilidade em seu Projeto — concluído em 29 de dezembro de 2024",
+          "Entrega Contínua: Confiabilidade e Qualidade na Implantação de Software — concluído em 12 de dezembro de 2024",
+          "Equipes Ágeis: Organizando os Papéis em uma Equipe — concluído em 10 de fevereiro de 2025",
+          "Profissão Tech Lead: Conhecendo a Liderança Técnica — concluído em 27 de fevereiro de 2025",
+          "Quality Assurance: Plano de Testes e Gestão de Bugs — concluído em 05 de março de 2025",
+          "Extreme Programming: Metodologia de Desenvolvimento Ágil de Software — concluído em 17 de março de 2025",
+          "Tech Lead: Construindo Práticas e Rotinas de Gestão — concluído em 26 de abril de 2025"
+        ]
+      },
       "pos-arquitetura": {
         "title": "Pós-graduação em Arquitetura de Software",
         "institution": "UnyLeya",
@@ -159,6 +177,8 @@
     "title": "Skills",
     "subtitle": "Níveis de domínio autoavaliados (1–8), alinhados ao meu currículo.",
     "recentHighlightNote": "As tecnologias marcadas em dourado são as que mais tenho atuado recentemente.",
+    "showMore": "Ver mais",
+    "showLess": "Ver menos",
     "labels": {
       "html-css": "HTML / CSS",
       "js": "JavaScript",
@@ -167,6 +187,17 @@
       "java": "Java",
       "node": "Node.js",
       "react": "React",
+      "unit-testing": "Testes unitários",
+      "e2e-testing": "Testes E2E",
+      "refine-tasks-requirements": "Refino de tarefas e requisitos",
+      "leveraging-ai-tools": "Uso de ferramentas de IA",
+      "nextjs": "Next.js",
+      "nestjs": "Nest.js",
+      "spring-boot": "Spring Boot",
+      "react-native-expo": "React Native (Expo)",
+      "prototype-figma": "Prototipação (Figma)",
+      "uml-modeling": "Modelagem UML",
+      "database-modeling": "Modelagem de banco de dados",
       "angular": "Angular",
       "cloud": "Infra & nuvem",
       "docker": "Docker",

@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { keyframes } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { clientsCarousel } from '../../data/clientsCarousel'
+import './ClientsCarousel.css'
 
 /** Metade da largura = uma cópia da lista → loop perfeito */
 const clientsMarquee = keyframes`
@@ -17,7 +18,7 @@ const clientsMarquee = keyframes`
 function ClientCard({ name, logoSrc }: { name: string; logoSrc: string }) {
   return (
     <Box
-      className="shrink-0"
+      className="clients-card"
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -75,14 +76,14 @@ export function ClientsCarousel() {
   const loop = [...clientsCarousel, ...clientsCarousel]
 
   return (
-    <Box className="mt-10 w-full">
-      <Typography variant="subtitle1" className="mb-1 font-semibold">
+    <Box className="clients-root">
+      <Typography variant="subtitle1" className="clients-title">
         {t('experience.clientsCarouselTitle')}
       </Typography>
       
 
       <Box
-        className="relative w-full overflow-x-hidden overflow-y-visible"
+        className="clients-marquee-shell"
         sx={{
           minHeight: 78,
           display: 'flex',

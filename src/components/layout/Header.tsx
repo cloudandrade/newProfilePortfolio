@@ -25,6 +25,7 @@ import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
 import { NAV_SECTION_IDS, useActiveNavSection } from '../../hooks/useActiveNavSection'
 import { useThemeMode } from '../../theme/useThemeMode'
+import './Header.css'
 
 function scrollToHash(href: string) {
   const el = document.querySelector(href)
@@ -91,7 +92,7 @@ export function Header() {
   }
 
   const controls = (
-    <Box className="flex items-center gap-1">
+    <Box className="header-controls">
       <FormControl size="small" sx={{ minWidth: 108 }}>
         <Select
           value={currentLang}
@@ -121,7 +122,7 @@ export function Header() {
   const desktopNav = (
     <Box
       component="nav"
-      className="flex flex-wrap items-center justify-end gap-0.5"
+      className="header-desktop-nav"
       aria-label={t('a11y.mainNav')}
     >
       {NAV_SECTION_IDS.map((key) => (
@@ -140,7 +141,7 @@ export function Header() {
 
   return (
     <>
-      <a className="skip-link" href="#main-content">
+      <a className="header-skip-link" href="#main-content">
         {t('skipLink')}
       </a>
       <AppBar
@@ -154,7 +155,7 @@ export function Header() {
         }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters className="flex min-h-[64px] justify-between gap-2 py-2">
+          <Toolbar disableGutters className="header-toolbar">
             <Button
               color="inherit"
               onClick={() => handleNav('#home')}
@@ -169,7 +170,7 @@ export function Header() {
               <Box
                 component="span"
                 sx={{ color: 'primary.main', ml: 0.5 }}
-                className="hidden sm:inline"
+                className="header-last-name"
               >
                 Andrade
               </Box>
@@ -177,7 +178,7 @@ export function Header() {
             {isMd ? (
               desktopNav
             ) : (
-              <Box className="flex items-center gap-0.5">
+              <Box className="header-mobile-controls">
                 {controls}
                 <IconButton
                   color="inherit"
@@ -207,8 +208,8 @@ export function Header() {
           },
         }}
       >
-        <Box className="w-[min(100vw-48px,280px)] pt-2" role="presentation">
-          <Box className="flex justify-end px-2">
+        <Box className="header-drawer-content" role="presentation">
+          <Box className="header-drawer-close">
             <IconButton aria-label={t('a11y.closeMenu')} onClick={() => setDrawerOpen(false)}>
               <CloseIcon />
             </IconButton>

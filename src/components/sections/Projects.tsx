@@ -13,6 +13,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { projects } from '../../data/projects'
 import { Section } from '../layout/Section'
+import './Projects.css'
 
 export function Projects() {
   const { t } = useTranslation()
@@ -24,17 +25,17 @@ export function Projects() {
       subtitle={t('projects.subtitle')}
     >
       {projects.length === 0 ? (
-        <Card className="max-w-xl" sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}>
-          <CardContent className="flex flex-col items-center gap-4 py-12 text-center">
+        <Card className="projects-empty-card" sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}>
+          <CardContent className="projects-empty-content">
             <ConstructionOutlinedIcon color="primary" sx={{ fontSize: 52 }} />
             <Typography variant="h6">{t('projects.emptyTitle')}</Typography>
-            <Typography variant="body2" color="text.secondary" className="max-w-sm">
+            <Typography variant="body2" color="text.secondary" className="projects-empty-body">
               {t('projects.emptyBody')}
             </Typography>
           </CardContent>
         </Card>
       ) : (
-        <Box className="grid gap-6 md:grid-cols-2">
+        <Box className="projects-grid">
           {projects.map((p) => (
             <Card key={p.id} sx={{ bgcolor: 'background.paper' }}>
               {p.imageUrl && (
@@ -44,10 +45,10 @@ export function Projects() {
                 <Typography variant="h6" component="h3">
                   {p.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" className="mt-1">
+                <Typography variant="body2" color="text.secondary" className="projects-description">
                   {p.description}
                 </Typography>
-                <Box className="mt-3 flex flex-wrap gap-1">
+                <Box className="projects-stack">
                   {p.stack.map((item) => (
                     <Chip
                       key={item}
@@ -59,7 +60,7 @@ export function Projects() {
                   ))}
                 </Box>
               </CardContent>
-              <CardActions className="px-4 pb-4">
+              <CardActions className="projects-actions">
                 {p.liveUrl && (
                   <Button
                     size="small"

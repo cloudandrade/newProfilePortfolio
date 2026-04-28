@@ -1,0 +1,29 @@
+@reference "../../index.css";
+
+.projects-empty-card {
+  @apply max-w-xl;
+}
+
+.projects-empty-content {
+  @apply flex flex-col items-center gap-4 py-12 text-center;
+}
+
+.projects-empty-body {
+  @apply max-w-sm;
+}
+
+.projects-grid {
+  @apply grid gap-6 md:grid-cols-2;
+}
+
+.projects-description {
+  @apply mt-1;
+}
+
+.projects-stack {
+  @apply mt-3 flex flex-wrap gap-1;
+}
+
+.projects-actions {
+  @apply px-4 pb-4;
+}

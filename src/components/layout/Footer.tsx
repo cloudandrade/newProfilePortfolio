@@ -4,6 +4,7 @@ import PhoneIcon from '@mui/icons-material/Phone'
 import { Box, Container, IconButton, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
+import './Footer.css'
 
 export function Footer() {
   const { t } = useTranslation()
@@ -11,21 +12,21 @@ export function Footer() {
   return (
     <Box
       component="footer"
-      className="mt-8 border-t py-10"
+      className="footer-root"
       sx={{ borderColor: 'divider' }}
     >
       <Container
         maxWidth="lg"
-        className="flex flex-col items-center justify-between gap-6 md:flex-row"
+        className="footer-container"
       >
         <Typography
           variant="body2"
           color="text.secondary"
-          className="text-center md:text-left"
+          className="footer-text"
         >
           © {new Date().getFullYear()} {profile.name}. {t('footer.stack')}
         </Typography>
-        <Box className="flex gap-1">
+        <Box className="footer-actions">
           <IconButton
             component="a"
             href={profile.linkedinUrl}

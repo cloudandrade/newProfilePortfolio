@@ -1,0 +1,106 @@
+@reference "../../index.css";
+
+.experience-work-title {
+  @apply mb-6 font-semibold;
+}
+
+.experience-actions {
+  @apply mb-4 flex flex-wrap gap-2;
+}
+
+.experience-content {
+  @apply relative flex gap-4 md:gap-6;
+}
+
+.experience-track-shell {
+  @apply relative hidden w-7 md:block;
+}
+
+.experience-track {
+  @apply relative z-[1] flex h-full flex-col items-center justify-between py-2;
+}
+
+.experience-scroll {
+  @apply flex-1 overflow-y-auto px-3;
+}
+
+.experience-card {
+  @apply rounded-2xl border px-5 py-5;
+}
+
+.experience-card-header {
+  @apply mb-3 flex flex-wrap items-center gap-3;
+}
+
+.experience-logo {
+  @apply h-8 max-w-[140px] object-contain object-left;
+}
+
+.experience-period {
+  @apply font-mono tracking-wider;
+}
+
+.experience-role {
+  @apply mt-0.5;
+}
+
+.experience-highlights {
+  @apply m-0 list-none space-y-2 p-0;
+}
+
+.experience-highlight {
+  @apply relative pl-4 text-sm leading-relaxed before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-[#00f2c3]/60 before:content-[''];
+}
+
+.experience-education-title {
+  @apply mb-6 mt-16 font-semibold;
+}
+
+.experience-education-layout {
+  @apply grid max-w-6xl gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)];
+}
+
+.experience-education-side {
+  @apply grid gap-5;
+  grid-template-rows: auto 1fr;
+}
+
+.experience-education-card {
+  @apply rounded-xl border p-5 transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(0,242,195,0.15)];
+}
+
+.experience-education-card-featured {
+  @apply h-full;
+}
+
+.experience-education-card-highlighted {
+  @apply min-h-[190px];
+}
+
+.experience-education-compact-group {
+  @apply grid content-start gap-4 sm:grid-cols-2;
+}
+
+.experience-education-card-compact {
+  @apply h-full;
+}
+
+.experience-education-compact-group .experience-education-card-compact:last-child {
+  @apply sm:col-span-2;
+}
+
+.experience-education-period {
+  @apply font-mono;
+}
+
+.experience-education-title-item {
+  @apply mt-1 text-lg;
+}
+
+.experience-education-institution {
+  @apply mb-2;
+}
+
+.experience-education-details {
+  @apply m-0 list-disc space-y-1 pl-5 text-sm;
+}

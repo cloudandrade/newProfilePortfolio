@@ -1,0 +1,17 @@
+@reference "../../index.css";
+
+.about-intro {
+  @apply mb-8 max-w-3xl leading-relaxed;
+}
+
+.about-objective {
+  @apply mb-10 max-w-3xl border-l-2 pl-4 leading-relaxed;
+}
+
+.about-specializations-title {
+  @apply mb-4 font-semibold;
+}
+
+.about-specializations-list {
+  @apply flex flex-wrap gap-2;
+}

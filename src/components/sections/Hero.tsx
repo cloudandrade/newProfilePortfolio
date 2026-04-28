@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import './Hero.css'
 
 const gridPattern =
   "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
@@ -85,27 +86,27 @@ export function Hero() {
     <Box
       id="home"
       component="section"
-      className="relative flex min-h-[100svh] items-center overflow-hidden scroll-mt-[72px]"
+      className="hero-root"
     >
       <motion.div
-        className="pointer-events-none absolute inset-0 -z-10"
+        className="hero-bg-layer"
         style={{ y: yBg, opacity: fadeHero }}
         aria-hidden
       >
         <Box
-          className="absolute -top-1/4 right-[-20%] h-[70vmin] w-[70vmin] rounded-full blur-[100px]"
+          className="hero-glow hero-glow-top"
           sx={{
             background: `radial-gradient(circle, ${tealGlow} 0%, transparent 68%)`,
           }}
         />
         <Box
-          className="absolute bottom-[-25%] left-[-25%] h-[65vmin] w-[65vmin] rounded-full blur-[100px]"
+          className="hero-glow hero-glow-bottom"
           sx={{
             background: `radial-gradient(circle, ${warmGlow} 0%, transparent 68%)`,
           }}
         />
         <Box
-          className="absolute inset-0"
+          className="hero-grid-overlay"
           sx={{
             opacity: gridOpacity,
             backgroundImage: gridPattern,
@@ -113,26 +114,26 @@ export function Hero() {
         />
       </motion.div>
 
-      <Container maxWidth="lg" className="relative z-[1] py-24 md:py-32">
-        <Box className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-8">
-          <Box className="order-2 md:order-1 md:col-span-7">
+      <Container maxWidth="lg" className="hero-container">
+        <Box className="hero-grid">
+          <Box className="hero-content-col">
             <Typography
               variant="overline"
-              className="font-mono tracking-[0.28em]"
+              className="hero-eyebrow"
               sx={{ color: 'primary.main' }}
             >
               {t('hero.eyebrow')}
             </Typography>
             <Typography
               variant="h1"
-              className="mt-2 text-4xl sm:text-5xl md:text-6xl"
+              className="hero-name"
               sx={{ color: 'text.primary' }}
             >
               {profile.name}
             </Typography>
             <Typography
               variant="h5"
-              className="mt-3 font-medium"
+              className="hero-title"
               sx={{ color: 'primary.main' }}
             >
               {t('profile.title')}
@@ -140,11 +141,11 @@ export function Hero() {
             <Typography
               variant="body1"
               color="text.secondary"
-              className="mt-6 max-w-xl leading-relaxed"
+              className="hero-objective"
             >
               {t('profile.objective')}
             </Typography>
-            <Box className="mt-8 flex flex-wrap gap-3">
+            <Box className="hero-actions">
               <Box
                 component={motion.div}
                 animate={
@@ -221,10 +222,10 @@ export function Hero() {
             </Box>
           </Box>
 
-          <Box className="order-1 flex justify-center md:order-2 md:col-span-5 md:justify-end">
+          <Box className="hero-media-col">
             <motion.div style={{ y: yPhoto, width: 'min(100%, 520px)' }}>
               <Box
-                className="relative rounded-2xl"
+                className="hero-card-shell"
                 sx={{
                   width: '100%',
                   height: 430,
@@ -266,7 +267,7 @@ export function Hero() {
                           component="img"
                           src={profile.photoSrc}
                           alt={profile.name}
-                          className="block h-full w-full rounded-xl object-cover"
+                          className="hero-photo"
                           width={280}
                           height={373}
                           fetchPriority="high"
@@ -332,12 +333,12 @@ export function Hero() {
 
         {!reduced && (
           <motion.div
-            className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
+            className="hero-scroll-hint"
             style={{ color: theme.palette.text.secondary }}
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Typography variant="caption" className="uppercase tracking-widest">
+            <Typography variant="caption" className="hero-scroll-hint-text">
               {t('hero.scrollHint')}
             </Typography>
             <ArrowDownwardIcon fontSize="small" aria-hidden />

@@ -6,18 +6,19 @@ import { Box, Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
 import { Section } from '../layout/Section'
+import './Contact.css'
 
 export function Contact() {
   const { t } = useTranslation()
 
   return (
     <Section id="contact" title={t('contact.title')} subtitle={t('contact.subtitle')}>
-      <Box className="flex max-w-xl flex-col gap-3">
+      <Box className="contact-list">
         <Button
           variant="outlined"
           color="primary"
           fullWidth
-          className="justify-start gap-2 py-3"
+          className="contact-btn contact-btn-with-gap"
           href={profile.emailHref}
           component="a"
           startIcon={<EmailIcon />}
@@ -28,7 +29,7 @@ export function Contact() {
           variant="outlined"
           color="primary"
           fullWidth
-          className="justify-start py-3"
+          className="contact-btn"
           href={profile.phoneHref}
           component="a"
           startIcon={<PhoneIcon />}
@@ -39,7 +40,7 @@ export function Contact() {
           variant="outlined"
           color="primary"
           fullWidth
-          className="justify-start py-3"
+          className="contact-btn"
           href={profile.linkedinUrl}
           component="a"
           target="_blank"
@@ -49,11 +50,11 @@ export function Contact() {
           {t('contact.linkedinLabel')} / {profile.linkedinSlug}
         </Button>
         <Box
-          className="flex items-start gap-2 rounded-xl border px-4 py-3"
+          className="contact-address"
           sx={{ borderColor: 'divider' }}
         >
-          <LocationOnIcon color="primary" className="mt-0.5 shrink-0" fontSize="small" />
-          <Typography variant="body2" color="text.secondary" className="text-left leading-relaxed">
+          <LocationOnIcon color="primary" className="contact-address-icon" fontSize="small" />
+          <Typography variant="body2" color="text.secondary" className="contact-address-text">
             {t('profile.address')}
           </Typography>
         </Box>

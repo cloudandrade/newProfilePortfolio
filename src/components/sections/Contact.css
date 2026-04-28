@@ -1,0 +1,25 @@
+@reference "../../index.css";
+
+.contact-list {
+  @apply flex max-w-xl flex-col gap-3;
+}
+
+.contact-btn {
+  @apply justify-start py-3;
+}
+
+.contact-btn-with-gap {
+  @apply gap-2;
+}
+
+.contact-address {
+  @apply flex items-start gap-2 rounded-xl border px-4 py-3;
+}
+
+.contact-address-icon {
+  @apply mt-0.5 shrink-0;
+}
+
+.contact-address-text {
+  @apply text-left leading-relaxed;
+}

@@ -1,0 +1,17 @@
+@reference "../../index.css";
+
+.clients-root {
+  @apply mt-10 w-full;
+}
+
+.clients-title {
+  @apply mb-1 font-semibold;
+}
+
+.clients-marquee-shell {
+  @apply relative w-full overflow-x-hidden overflow-y-visible;
+}
+
+.clients-card {
+  @apply shrink-0;
+}
