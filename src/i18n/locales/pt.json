@@ -226,7 +226,6 @@
     "linkedinLabel": "LinkedIn"
   },
   "footer": {
-    "stack": "React, MUI e Tailwind.",
     "linkedinAria": "Perfil no LinkedIn",
     "emailAria": "Enviar e-mail",
     "phoneAria": "Ligar por telefone"
