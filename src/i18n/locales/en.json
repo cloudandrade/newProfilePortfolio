@@ -42,11 +42,17 @@
     },
     "specializations": [
       "JavaScript & TypeScript, Java, and Python",
+      "Front-end focused on quality, performance optimization, and adaptability",
+      "Front-end Styling (Glass / Fluid / Liquid / Neon designs, animations, parallax, etc.)",
+      "Front-end Performance Optimization and Monitoring (Lazy loading, code splitting, image optimization, responsive design, Google Lighthouse, PageSpeed Insights, etc.)",
+      "Front-end Accessibility (WCAG 2.1, Aria roles, aria-labels, TTS.)",
+      "Front-end Internationalization (i18n, L10n, etc.)",
+      "Performance Monitoring (Google Lighthouse, PageSpeed Insights, etc.)",
       "Back-end & APIs",
       "Software architecture, patterns, and best practices",
       "Full-stack development",
       "Scrum Foundation",
-      "Infrastructure (Docker, Bitbucket, GitHub, Heroku, CircleCI, AWS)",
+      "Infrastructure (Docker, Bitbucket, GitHub Actions, Jenkins, Heroku, CircleCI, Netlify, Vercel, AWS, Google Cloud)",
       "CI/CD pipelines"
     ],
     "address": "Rua Caraíva, 9595, Solar de Maiorca condo, apt 504, block 2 — Abrantes, Camaçari — BA, Brazil"
@@ -181,7 +187,7 @@
     "showMore": "Show more",
     "showLess": "Show less",
     "labels": {
-      "html-css": "HTML / CSS",
+      "html-css": "HTML / CSS / JS (Puro)",
       "js": "JavaScript",
       "ts": "TypeScript",
       "serverless": "Serverless",
