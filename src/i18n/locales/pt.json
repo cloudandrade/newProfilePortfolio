@@ -1,0 +1,209 @@
+{
+  "skipLink": "Pular para o conteúdo",
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "experience": "Experiência",
+    "skills": "Skills",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "theme": {
+    "useLight": "Usar tema claro",
+    "useDark": "Usar tema escuro"
+  },
+  "language": {
+    "label": "Idioma",
+    "en": "Inglês",
+    "es": "Espanhol",
+    "pt": "Português"
+  },
+  "hero": {
+    "eyebrow": "Olá, eu sou",
+    "ctaContact": "Falar comigo",
+    "ctaExperience": "Ver trajetória",
+    "scrollHint": "Desça a página"
+  },
+  "about": {
+    "title": "Sobre",
+    "subtitle": "Como trabalho, o que me move e onde mais me aprofundo.",
+    "intro": "Valorizo clareza técnica, código sustentável e colaboração em times que priorizam aprendizado contínuo. O trecho abaixo resume minha busca por equilíbrio entre qualidade e efetividade no dia a dia.",
+    "specializationsTitle": "Especializações"
+  },
+  "profile": {
+    "title": "Desenvolvedor Fullstack",
+    "objective": "Busco equilíbrio entre satisfação, qualidade e efetividade. Motivado a trabalhar com tecnologias que realmente gosto de usar.",
+    "terminal": {
+      "country": "Brasil",
+      "state": "Bahia",
+      "age": "32",
+      "maritalStatus": "Casado",
+      "hobbies": ["Jogos", "Filmes e Séries", "Animes", "Estudar", "Programar"]
+    },
+    "specializations": [
+      "Javascript & TypeScript, Java e Python",
+      "Back-end e APIs",
+      "Arquitetura de software, padrões e boas práticas",
+      "Desenvolvimento Full Stack",
+      "Scrum Foundation",
+      "Infraestrutura (Docker, Bitbucket, GitHub, Heroku, CircleCI, AWS)",
+      "Pipelines de CI/CD"
+    ],
+    "address": "Rua Caraíva, 9595, cond. Solar de Maiorca, apto 504, bloco 2 — Abrantes, Camaçari — BA"
+  },
+  "experience": {
+    "title": "Experiência & formação",
+    "subtitle": "Trajetória profissional e estudos — do júnior ao sênior, com foco em stack moderna e nuvem.",
+    "work": "Trabalho",
+    "scrollToStart": "Ir para o início",
+    "scrollToEnd": "Ir para o final",
+    "education": "Formação & certificações",
+    "clientsCarouselTitle": "Clientes & marcas com as quais atuei",
+    "clientsCarouselNote": "A menção a clientes é contexto factual da carreira. Contratos e NDAs podem limitar o que pode ser divulgado — revise seus acordos em caso de dúvida.",
+    "items": {
+      "bankme": {
+        "role": "Senior Fullstack Software Engineer",
+        "company": "Bankme",
+        "period": "jul. 2025 — atual",
+        "highlights": [
+          "Desenvolvimento full stack nos produtos e plataformas da Bankme.",
+          "Foco em qualidade, entrega e stack web moderna em contexto fintech."
+        ]
+      },
+      "illa-livelo": {
+        "role": "Senior Fullstack Software Engineer",
+        "company": "Illa / Livelo",
+        "period": "jul. 2024 — jun. 2025",
+        "highlights": [
+          "Desenvolvimento e evolução de funcionalidades e correção de bugs em aplicações corporativas.",
+          "Front-end com React e Angular."
+        ]
+      },
+      "squadra-shell": {
+        "role": "Senior Software Engineer",
+        "company": "Squadra / Shell",
+        "period": "mai. 2022 — jul. 2024",
+        "highlights": [
+          "Desenvolvimento e manutenção de sistemas no contexto Shellbox.",
+          "Stack: Angular, React, Node.js, Java, Python, AWS Lambda e Serverless."
+        ]
+      },
+      "add": {
+        "role": "Analista Desenvolvedor Pleno",
+        "company": ".Add",
+        "period": "abr. 2021 — abr. 2022",
+        "highlights": [
+          "Funcionalidades e correções em aplicações corporativas.",
+          "Angular, Node.js, AWS Lambda e Serverless."
+        ]
+      },
+      "stefanini": {
+        "role": "Programador Pleno",
+        "company": "Stefanini",
+        "period": "jul. 2020 — abr. 2021",
+        "highlights": ["Desenvolvimento e manutenção de sistemas corporativos."]
+      },
+      "capgemini": {
+        "role": "Programador Pleno",
+        "company": "Capgemini",
+        "period": "jun. 2019 — jul. 2020",
+        "highlights": ["Desenvolvimento e manutenção de sistemas corporativos."]
+      },
+      "cronsolucoes": {
+        "role": "Programador Pleno",
+        "company": "CronSoluções",
+        "period": "jun. 2017 — jul. 2019",
+        "highlights": ["Desenvolvimento e manutenção de sistemas corporativos."]
+      },
+      "abefs": {
+        "role": "Programador Júnior",
+        "company": "ABEFS",
+        "period": "jun. 2016 — jun. 2017",
+        "highlights": ["Início da trajetória profissional em desenvolvimento de software."]
+      }
+    }
+  },
+  "education": {
+    "items": {
+      "pos-arquitetura": {
+        "title": "Pós-graduação em Arquitetura de Software",
+        "institution": "UnyLeya",
+        "period": "2025 — em andamento",
+        "details": [
+          "Modelagem de software, participação em comunidade e gestão de DevOps."
+        ]
+      },
+      "ads-unijorge": {
+        "title": "Análise e Desenvolvimento de Sistemas",
+        "institution": "UniJorge",
+        "period": "2016 — 2019",
+        "details": [
+          "Curso tecnólogo. Participação na Campus Party 2018 e mostras de projetos."
+        ]
+      },
+      "scrum": {
+        "title": "Scrum Foundation (Certiprof)",
+        "institution": "Certiprof",
+        "period": "2017",
+        "details": ["Aprovação com 80% de aproveitamento."]
+      },
+      "ingles": {
+        "title": "Proficiência em inglês — Intermediate High",
+        "institution": "ACTFL",
+        "period": "2015",
+        "details": []
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Níveis de domínio autoavaliados (1–8), alinhados ao meu currículo.",
+    "recentHighlightNote": "As tecnologias marcadas em dourado são as que mais tenho atuado recentemente.",
+    "labels": {
+      "html-css": "HTML / CSS",
+      "js": "JavaScript",
+      "ts": "TypeScript",
+      "serverless": "Serverless",
+      "java": "Java",
+      "node": "Node.js",
+      "react": "React",
+      "angular": "Angular",
+      "cloud": "Infra & nuvem",
+      "docker": "Docker",
+      "iac": "Infraestrutura como código (IaC)",
+      "pipelines": "Pipelines CI/CD",
+      "puppeteer": "Automação (Puppeteer)",
+      "automations": "Automações & scripts",
+      "sql": "SQL",
+      "nosql": "NoSQL",
+      "git": "Git",
+      "tests": "Testes unitários",
+      "python": "Python"
+    }
+  },
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Seleção de trabalhos e experimentos. Em breve com links, demos e detalhes técnicos.",
+    "emptyTitle": "Em construção",
+    "emptyBody": "Esta área será preenchida com projetos reais: stack, repositórios, deploys e estudos de caso. Por enquanto, foque na experiência e nas skills acima.",
+    "demo": "Demo",
+    "code": "Código"
+  },
+  "contact": {
+    "title": "Contato",
+    "subtitle": "Vamos conversar sobre oportunidades, produto e tecnologia.",
+    "linkedinLabel": "LinkedIn"
+  },
+  "footer": {
+    "stack": "React, MUI e Tailwind.",
+    "linkedinAria": "Perfil no LinkedIn",
+    "emailAria": "Enviar e-mail",
+    "phoneAria": "Ligar por telefone"
+  },
+  "a11y": {
+    "mainNav": "Navegação principal",
+    "openMenu": "Abrir menu de navegação",
+    "closeMenu": "Fechar menu",
+    "mobileNav": "Navegação mobile"
+  }
+}
