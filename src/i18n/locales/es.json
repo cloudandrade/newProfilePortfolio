@@ -232,7 +232,13 @@
     "subtitle": "Hablemos de oportunidades, producto y tecnología.",
     "linkedinLabel": "LinkedIn"
   },
+  "resume": {
+    "downloadCta": "Descargar CV",
+    "downloadHint": "download curriculum",
+    "sectionSummary": "Resumen profesional"
+  },
   "footer": {
+    "stack": "Tailwind CSS.",
     "linkedinAria": "Perfil de LinkedIn",
     "emailAria": "Enviar correo",
     "phoneAria": "Llamar por teléfono"

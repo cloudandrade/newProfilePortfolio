@@ -1,11 +1,8 @@
 import { Box, Container, Typography } from '@mui/material'
-import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
 import './Footer.css'
 
 export function Footer() {
-  const { t } = useTranslation()
-
   return (
     <Box
       component="footer"

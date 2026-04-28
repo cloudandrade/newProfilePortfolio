@@ -1,5 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
@@ -16,6 +17,7 @@ import {
   ListItemText,
   MenuItem,
   Select,
+  Tooltip,
   Toolbar,
   useMediaQuery,
   useTheme,
@@ -23,6 +25,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
+import { generateResumePdf } from '../../features/resume/generateResumePdf'
 import { NAV_SECTION_IDS, useActiveNavSection } from '../../hooks/useActiveNavSection'
 import { useThemeMode } from '../../theme/useThemeMode'
 import './Header.css'
@@ -64,6 +67,10 @@ export function Header() {
     window.setTimeout(update, 450)
   }
 
+  const handleDownloadResume = () => {
+    generateResumePdf(t)
+  }
+
   const appBarBg = elevated
     ? alpha(theme.palette.background.default, theme.palette.mode === 'dark' ? 0.9 : 0.94)
     : 'transparent'
@@ -91,23 +98,24 @@ export function Header() {
     }
   }
 
+  const downloadControl = (
+    <Tooltip title={t('resume.downloadHint')} arrow>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={handleDownloadResume}
+        startIcon={<DownloadOutlinedIcon />}
+        sx={{ ml: 0.5, textTransform: 'none' }}
+        aria-label={t('resume.downloadHint')}
+      >
+        {t('resume.downloadCta')}
+      </Button>
+    </Tooltip>
+  )
+
   const controls = (
     <Box className="header-controls">
-      <FormControl size="small" sx={{ minWidth: 108 }}>
-        <Select
-          value={currentLang}
-          onChange={(e) => void i18n.changeLanguage(e.target.value)}
-          aria-label={t('language.label')}
-          sx={{
-            color: 'text.primary',
-            '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
-          }}
-        >
-          <MenuItem value="en">{t('language.en')}</MenuItem>
-          <MenuItem value="es">{t('language.es')}</MenuItem>
-          <MenuItem value="pt">{t('language.pt')}</MenuItem>
-        </Select>
-      </FormControl>
+      {downloadControl}
       <IconButton
         color="inherit"
         onClick={toggleMode}
@@ -135,6 +143,21 @@ export function Header() {
           {t(`nav.${key}`)}
         </Button>
       ))}
+      <FormControl size="small" sx={{ minWidth: 108, ml: 0.5 }}>
+        <Select
+          value={currentLang}
+          onChange={(e) => void i18n.changeLanguage(e.target.value)}
+          aria-label={t('language.label')}
+          sx={{
+            color: 'text.primary',
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
+          }}
+        >
+          <MenuItem value="en">{t('language.en')}</MenuItem>
+          <MenuItem value="es">{t('language.es')}</MenuItem>
+          <MenuItem value="pt">{t('language.pt')}</MenuItem>
+        </Select>
+      </FormControl>
       {controls}
     </Box>
   )
@@ -215,6 +238,9 @@ export function Header() {
             </IconButton>
           </Box>
           <List component="nav" aria-label={t('a11y.mobileNav')}>
+            <ListItemButton onClick={handleDownloadResume}>
+              <ListItemText primary={t('resume.downloadCta')} secondary={t('resume.downloadHint')} />
+            </ListItemButton>
             {NAV_SECTION_IDS.map((key) => (
               <ListItemButton
                 key={key}

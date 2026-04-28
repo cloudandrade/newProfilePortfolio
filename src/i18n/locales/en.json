@@ -232,7 +232,13 @@
     "subtitle": "Let’s talk about opportunities, product, and technology.",
     "linkedinLabel": "LinkedIn"
   },
+  "resume": {
+    "downloadCta": "Download CV",
+    "downloadHint": "download curriculum",
+    "sectionSummary": "Professional summary"
+  },
   "footer": {
+    "stack": "Tailwind CSS.",
     "linkedinAria": "LinkedIn profile",
     "emailAria": "Send email",
     "phoneAria": "Call phone"

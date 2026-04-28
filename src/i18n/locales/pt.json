@@ -231,7 +231,13 @@
     "subtitle": "Vamos conversar sobre oportunidades, produto e tecnologia.",
     "linkedinLabel": "LinkedIn"
   },
+  "resume": {
+    "downloadCta": "Download CV",
+    "downloadHint": "download curriculum",
+    "sectionSummary": "Resumo profissional"
+  },
   "footer": {
+    "stack": "Tailwind CSS.",
     "linkedinAria": "Perfil no LinkedIn",
     "emailAria": "Enviar e-mail",
     "phoneAria": "Ligar por telefone"
