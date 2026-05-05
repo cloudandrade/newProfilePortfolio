@@ -32,7 +32,7 @@ export function Skills() {
           <Box className="skills-more">
             <Button
               variant="outlined"
-              size="small"
+              size="medium"
               color="primary"
               className="skills-toggle-btn"
               onClick={() => setShowMore((prev) => !prev)}

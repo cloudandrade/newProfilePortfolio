@@ -31,9 +31,9 @@ function ClientCard({ name, logoSrc }: { name: string; logoSrc: string }) {
           t.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
         py: 1,
         px: 1.5,
-        minWidth: 176,
-        maxWidth: 220,
-        minHeight: 62,
+        minWidth: 184,
+        maxWidth: 228,
+        minHeight: 70,
       }}
     >
       <Box
@@ -42,7 +42,7 @@ function ClientCard({ name, logoSrc }: { name: string; logoSrc: string }) {
         alt=""
         sx={{
           display: 'block',
-          height: 26,
+          height: 30,
           width: 'auto',
           maxWidth: 'min(200px, 92%)',
           objectFit: 'contain',
@@ -58,7 +58,7 @@ function ClientCard({ name, logoSrc }: { name: string; logoSrc: string }) {
           WebkitBoxOrient: 'vertical',
           overflow: 'hidden',
           textAlign: 'center',
-          fontSize: '0.68rem',
+          fontSize: '0.78rem',
           fontWeight: 600,
           lineHeight: 1.15,
           color: 'text.primary',

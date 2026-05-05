@@ -9,7 +9,7 @@ export function Footer() {
       className="footer-root"
       sx={{ borderColor: 'divider' }}
     >
-      <Container maxWidth="lg" className="footer-container">
+      <Container className="footer-container">
         <Typography
           variant="body2"
           color="text.secondary"

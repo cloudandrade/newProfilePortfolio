@@ -1,7 +1,14 @@
 @reference "../../index.css";
 
 .hero-root {
-  @apply relative flex min-h-[100svh] items-center overflow-hidden scroll-mt-[92px];
+  /**
+   * `overflow-x: hidden` + `overflow-y: visible` faz o navegador forçar `overflow-y: auto`
+   * (especificação), gerando uma segunda scrollbar na secção.
+   * `overflow-x: clip` corta o horizontal sem alterar o eixo Y.
+   */
+  @apply relative flex min-h-[100svh] items-center scroll-mt-[108px];
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .hero-bg-layer {
@@ -37,15 +44,37 @@
 }
 
 .hero-name {
-  @apply mt-2 text-4xl sm:text-5xl md:text-6xl;
+  @apply mt-2 overflow-visible pb-2 text-5xl sm:text-6xl md:text-7xl;
+}
+
+/** Base da letra; hover/scale fica no `sx` do Hero (acima da layer do Tailwind). */
+.hero-name-letter {
+  @apply align-baseline;
 }
 
 .hero-title {
-  @apply mt-3 min-h-[2.75rem] font-medium sm:min-h-[3.25rem];
+  @apply mt-3 min-h-[3rem] font-medium sm:min-h-[3.5rem];
+}
+
+.hero-badge-pulse {
+  animation: hero-badge-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-badge-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(1.06);
+  }
 }
 
 .hero-typewriter-cursor {
-  @apply ml-0.5 inline-block w-[0.55ch] translate-y-px font-normal;
+  @apply ml-1 inline-block h-6 w-[3px] shrink-0 rounded-[1px] align-middle;
 }
 
 .hero-typewriter-cursor--blink {
@@ -69,25 +98,30 @@
     animation: none;
     opacity: 1;
   }
+
+  .hero-badge-pulse {
+    animation: none;
+  }
 }
 
-@keyframes hero-card-float {
+/** Foto + moldura + tags tech: um único movimento para cima/baixo */
+@keyframes hero-media-float-y {
   0%,
   100% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-11px);
+    transform: translateY(-14px);
   }
 }
 
-.hero-card-float {
-  animation: hero-card-float 4.8s ease-in-out infinite;
+.hero-media-float {
+  animation: hero-media-float-y 3.8s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-card-float {
+  .hero-media-float {
     animation: none;
   }
 }

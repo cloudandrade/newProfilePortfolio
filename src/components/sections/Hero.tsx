@@ -1,12 +1,70 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import { alpha, Box, Button, Container, Typography, useTheme } from '@mui/material'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import {
+  alpha,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import type { SxProps } from '@mui/material/styles'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
-import { useHeroRotatingTypewriter } from '../../hooks/useHeroRotatingTypewriter'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import './Hero.css'
+
+function mapNameLetters(str: string, keyPrefix: string) {
+  return str.split('').map((ch, idx) => (
+    <Box
+      component="span"
+      key={`${keyPrefix}-${idx}`}
+      className="hero-name-letter"
+      sx={{
+        display: 'inline-block',
+        position: 'relative',
+        verticalAlign: 'baseline',
+        cursor: 'default',
+        transformOrigin: '50% 82%',
+        /** Emotion sobrescreve estilos do Typography no span (hover em arquivo CSS ficava perdendo na cascade) */
+        transition: 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        '@media (prefers-reduced-motion: reduce)': {
+          transition: 'none',
+          '&:hover': { transform: 'none' },
+        },
+        '@media (prefers-reduced-motion: no-preference)': {
+          '&:hover': {
+            transform: 'scale(2) !important',
+            zIndex: 2,
+          },
+        },
+      }}
+    >
+      {ch}
+    </Box>
+  ))
+}
+
+const HERO_MEDIA_BADGES: { label: string; sx: SxProps }[] = [
+  { label: 'React', sx: { top: 14, left: { xs: 4, md: -20 } } },
+  {
+    label: 'TS',
+    sx: {
+      top: '33%',
+      right: { xs: -14, md: -20 },
+      transform: 'translateY(-50%)',
+    },
+  },
+  { label: 'Node', sx: { bottom: 36, left: { xs: 0, md: -26 } } },
+  { label: 'Python', sx: { bottom: -18, right: { xs: '8%', md: 36 } } },
+]
 
 export function Hero() {
   const { t, i18n } = useTranslation()
@@ -49,25 +107,45 @@ export function Hero() {
   const [heroFirstName, ...heroRestName] = profile.name.split(' ')
   const heroFamilyName = heroRestName.join(' ')
 
-  const rotatingSubtitles = useMemo(() => {
+  const ROLES = useMemo(() => {
     const raw = t('hero.rotatingSubtitles', { returnObjects: true })
-    return Array.isArray(raw) ? raw : []
+    return Array.isArray(raw) ? [...(raw as string[])] : []
   }, [t, i18n.language])
 
-  const typewriter = useHeroRotatingTypewriter(rotatingSubtitles, {
-    reducedMotion: reduced,
-    typeIntervalMs: 52,
-    holdMs: 2800,
-    deleteIntervalMs: 42,
-  })
+  const useTyping = () => {
+    const [text, setText] = useState("");
+    const [i, setI] = useState(0);
+    const [del, setDel] = useState(false);
+  
+    useEffect(() => {
+      const word = ROLES[i % ROLES.length];
+      const speed = del ? 40 : 80;
+      const t = setTimeout(() => {
+        const next = del ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1);
+        setText(next);
+        if (!del && next === word) setTimeout(() => setDel(true), 1400);
+        else if (del && next === "") {
+          setDel(false);
+          setI((v) => v + 1);
+        }
+      }, speed);
+      return () => clearTimeout(t);
+    }, [text, del, i]);
+  
+    return text;
+  };
+
+  const rotatingRoles = useTyping()
 
   const mintHighlight = '#6ee7b7'
   const lightGreen = theme.palette.primary.light
 
   const ctaShapeSx = {
     borderRadius: 1.5,
-    minHeight: 46,
-    px: 3,
+    minHeight: 52,
+    px: 4,
+    py: 1.25,
+    fontSize: '1.08rem',
     textTransform: 'none' as const,
   }
 
@@ -123,23 +201,89 @@ export function Hero() {
         />
       </motion.div>
 
-      <Container maxWidth="lg" className="hero-container">
+      <Container className="hero-container">
         <Box className="hero-grid">
           <Box className="hero-content-col">
-            <Typography
-              variant="overline"
-              className="hero-eyebrow"
-              sx={{ color: 'primary.main' }}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                gap: { xs: 1.25, md: 1.5 },
+                width: '100%',
+                mb: { xs: 0.75, md: 1 },
+              }}
             >
-              {t('hero.eyebrow')}
-            </Typography>
-            <Typography variant="h1" component="h1" className="hero-name">
+              <Box
+                sx={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  px: 1.5,
+                  py: 0.5,
+                  borderRadius: 999,
+                  border: `1px solid ${alpha(accent, 0.32)}`,
+                  bgcolor: alpha(accent, isDark ? 0.06 : 0.08),
+                  flexShrink: 0,
+                  maxWidth: '100%',
+                }}
+                role="status"
+              >
+                <Box
+                  className={reduced ? undefined : 'hero-badge-pulse'}
+                  sx={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    flexShrink: 0,
+                    bgcolor: 'primary.main',
+                  }}
+                  aria-hidden
+                />
+                <Typography
+                  variant="caption"
+                  component="span"
+                  sx={{
+                    fontFamily: 'var(--font-mono)',
+                    letterSpacing: '0.04em',
+                    fontWeight: 600,
+                    color: 'text.primary',
+                  }}
+                >
+                  {t('hero.availabilityBadge')}
+                </Typography>
+              </Box>
+              <Typography
+                variant="overline"
+                component="p"
+                className="hero-eyebrow"
+                sx={{
+                  margin: 0,
+                  padding: 0,
+                  width: '100%',
+                  display: 'block',
+                  color: 'primary.main',
+                }}
+              >
+                {t('hero.eyebrow')}
+              </Typography>
+            </Box>
+            <Typography
+              variant="h1"
+              component="h1"
+              className="hero-name"
+              aria-label={profile.name}
+              sx={{ overflow: 'visible', isolation: 'isolate' }}
+            >
               <Box component="span" sx={{ color: 'text.primary' }}>
-                {heroFirstName}
+                {mapNameLetters(heroFirstName, 'first')}
               </Box>
               {heroFamilyName ? (
-                <Box component="span" sx={{ color: 'primary.main', ml: { xs: 1, sm: 1.5 } }}>
-                  {heroFamilyName}
+                <Box
+                  component="span"
+                  sx={{ color: 'primary.main', ml: { xs: 1, sm: 1.5 } }}
+                >
+                  {mapNameLetters(heroFamilyName, 'last')}
                 </Box>
               ) : null}
             </Typography>
@@ -150,26 +294,12 @@ export function Hero() {
               sx={{
                 color: isDark ? lightGreen : theme.palette.primary.main,
                 fontWeight: 600,
+                '& span, &::after': { color: 'inherit' },
               }}
-              aria-label={typewriter.currentLineFull || undefined}
             >
-              {typewriter.displayText}
-              {typewriter.showCursor ? (
-                <Box
-                  component="span"
-                  aria-hidden
-                  className={
-                    typewriter.blinkCursor
-                      ? 'hero-typewriter-cursor hero-typewriter-cursor--blink'
-                      : 'hero-typewriter-cursor'
-                  }
-                  sx={{
-                    color: isDark ? mintHighlight : theme.palette.primary.dark,
-                  }}
-                >
-                  |
-                </Box>
-              ) : null}
+              <Box component="span" sx={{ color: 'inherit' }}>
+                {rotatingRoles}
+              </Box>
             </Typography>
             <Typography
               variant="body1"
@@ -212,6 +342,7 @@ export function Hero() {
                   component="a"
                   target="_blank"
                   rel="noopener noreferrer"
+                  endIcon={<ArrowForwardIcon sx={{ fontSize: 22 }} />}
                   sx={{
                     ...ctaShapeSx,
                     position: 'relative',
@@ -253,16 +384,86 @@ export function Hero() {
                 {t('hero.ctaExperience')}
               </Button>
             </Box>
+
+            <Box
+              sx={{
+                mt: { xs: 2, md: 2.25 },
+                display: 'flex',
+                alignItems: 'center',
+                gap: { xs: 1, md: 1.25 },
+                color: 'text.secondary',
+              }}
+              aria-label="Social links"
+              component="nav"
+            >
+              {profile.githubUrl ? (
+                <Tooltip title={t('hero.social.github')}>
+                  <IconButton
+                    href={profile.githubUrl}
+                    component="a"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    color="inherit"
+                    size="medium"
+                    aria-label={t('hero.social.github')}
+                  >
+                    <GitHubIcon />
+                  </IconButton>
+                </Tooltip>
+              ) : null}
+              <Tooltip title={t('hero.social.linkedin')}>
+                <IconButton
+                  href={profile.linkedinUrl}
+                  component="a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="inherit"
+                  size="medium"
+                  aria-label={t('hero.social.linkedin')}
+                >
+                  <LinkedInIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={t('hero.social.email')}>
+                <IconButton
+                  href={profile.emailHref}
+                  component="a"
+                  color="inherit"
+                  size="medium"
+                  aria-label={t('hero.social.email')}
+                >
+                  <EmailOutlinedIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>
           </Box>
 
-          <Box className="hero-media-col">
-            <motion.div style={{ y: yPhoto, width: 'min(100%, 520px)' }}>
-              <Box className={reduced ? undefined : 'hero-card-float'} sx={{ width: '100%' }}>
+          <Box className="hero-media-col" sx={{ position: 'relative' }}>
+            <Box sx={{ position: 'relative', zIndex: 1, mx: 'auto', width: 'min(100%, 520px)' }}>
+              <Box
+                aria-hidden
+                sx={{
+                  position: 'absolute',
+                  inset: { xs: -16, md: -24 },
+                  zIndex: 0,
+                  borderRadius: '2rem',
+                  pointerEvents: 'none',
+                  opacity: showCodeSide ? 0.45 : 1,
+                  transition: 'opacity 0.4s ease',
+                  background: `linear-gradient(145deg, ${alpha(accent, 0.42)} 0%, ${alpha(accent, 0.1)} 48%, transparent 100%)`,
+                  filter: 'blur(38px)',
+                }}
+              />
+              <motion.div style={{ position: 'relative', zIndex: 1, y: yPhoto, width: '100%' }}>
+              <Box
+                className={reduced ? undefined : 'hero-media-float'}
+                sx={{ position: 'relative', width: '100%' }}
+              >
                 <Box
                   className="hero-card-shell"
                   sx={{
                     width: '100%',
-                    height: 430,
+                    height: 458,
                     perspective: '1200px',
                     pt: 1,
                     pb: 1,
@@ -339,12 +540,12 @@ export function Hero() {
                           borderRadius: 2,
                           bgcolor: '#1b1f27',
                           border: '1px solid rgba(255, 255, 255, 0.06)',
-                          p: 2.5,
+                          p: 3,
                           overflow: 'hidden',
                           fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
                           color: '#b7ffd8',
-                          fontSize: '0.78rem',
-                          lineHeight: 1.6,
+                          fontSize: '0.9375rem',
+                          lineHeight: 1.65,
                           whiteSpace: 'pre-wrap',
                         }}
                       >
@@ -366,8 +567,37 @@ export function Hero() {
                   )}
                 </AnimatePresence>
                 </Box>
+
+              {!showCodeSide &&
+                HERO_MEDIA_BADGES.map((b) => (
+                  <Box
+                    key={b.label}
+                    component="span"
+                    aria-hidden
+                    sx={{
+                      ...b.sx,
+                      position: 'absolute',
+                      zIndex: 3,
+                      px: 1.4,
+                      py: 0.72,
+                      borderRadius: 999,
+                      border: `1px solid ${alpha(accent, 0.42)}`,
+                      bgcolor: alpha(isDark ? '#070f0d' : '#ffffff', isDark ? 0.94 : 0.88),
+                      backdropFilter: 'blur(12px)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.8125rem',
+                      fontWeight: 600,
+                      color: mintHighlight,
+                      boxShadow: isDark ? '0 6px 24px rgba(0, 0, 0, 0.42)' : '0 6px 20px rgba(0, 0, 0, 0.1)',
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    {b.label}
+                  </Box>
+                ))}
               </Box>
-            </motion.div>
+              </motion.div>
+            </Box>
           </Box>
         </Box>
 
@@ -381,7 +611,7 @@ export function Hero() {
             <Typography variant="caption" className="hero-scroll-hint-text">
               {t('hero.scrollHint')}
             </Typography>
-            <ArrowDownwardIcon fontSize="small" aria-hidden />
+            <ArrowDownwardIcon fontSize="medium" aria-hidden />
           </motion.div>
         )}
       </Container>

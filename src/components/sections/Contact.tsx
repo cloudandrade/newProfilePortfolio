@@ -53,7 +53,7 @@ export function Contact() {
           className="contact-address"
           sx={{ borderColor: 'divider' }}
         >
-          <LocationOnIcon color="primary" className="contact-address-icon" fontSize="small" />
+          <LocationOnIcon color="primary" className="contact-address-icon" fontSize="medium" />
           <Typography variant="body2" color="text.secondary" className="contact-address-text">
             {t('profile.address')}
           </Typography>

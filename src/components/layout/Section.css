@@ -5,7 +5,7 @@
 }
 
 .section-scroll-offset {
-  @apply scroll-mt-[92px];
+  @apply scroll-mt-[108px];
 }
 
 .section-title {
@@ -13,7 +13,7 @@
 }
 
 .section-subtitle {
-  @apply mb-10 max-w-2xl leading-relaxed;
+  @apply mb-10 max-w-3xl leading-relaxed;
 }
 
 .section-subtitle-spacer {

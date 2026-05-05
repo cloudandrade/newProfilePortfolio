@@ -31,7 +31,7 @@
 }
 
 .header-toolbar {
-  @apply min-h-[76px] gap-2 py-2.5 md:min-h-[84px] md:py-3;
+  @apply min-h-[88px] gap-2 py-3 md:min-h-[100px] md:py-[1.125rem];
 }
 
 .header-last-name {

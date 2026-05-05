@@ -36,18 +36,71 @@ export function createAppTheme(mode: PaletteMode) {
         fontWeight: 600,
         letterSpacing: '-0.03em',
         lineHeight: 1.15,
+        fontSize: 'clamp(2.5rem, 3.5vw + 1.15rem, 4.25rem)',
       },
-      h2: { fontWeight: 600, letterSpacing: '-0.02em' },
+      h2: {
+        fontWeight: 600,
+        letterSpacing: '-0.02em',
+        fontSize: 'clamp(1.875rem, 2vw + 1rem, 2.5rem)',
+      },
       h3: { fontWeight: 600 },
-      h4: { fontWeight: 600 },
-      h5: { fontWeight: 600 },
+      h4: {
+        fontWeight: 600,
+        letterSpacing: '-0.02em',
+        fontSize: 'clamp(1.5rem, 1.8vw + 0.85rem, 2.125rem)',
+      },
+      h5: {
+        fontWeight: 600,
+        fontSize: 'clamp(1.2rem, 1vw + 0.78rem, 1.625rem)',
+      },
       h6: { fontWeight: 600 },
+      subtitle1: {
+        fontWeight: 500,
+        fontSize: 'clamp(1.06rem, 0.45vw + 0.92rem, 1.1875rem)',
+      },
+      body1: {
+        fontSize: 'clamp(1.0625rem, 0.4vw + 0.9rem, 1.1875rem)',
+        lineHeight: 1.78,
+      },
+      body2: {
+        fontSize: 'clamp(1rem, 0.28vw + 0.88rem, 1.065rem)',
+        lineHeight: 1.68,
+      },
+      caption: {
+        fontSize: 'clamp(0.84375rem, 0.18vw + 0.74rem, 0.94375rem)',
+      },
+      overline: {
+        fontWeight: 600,
+        letterSpacing: '0.14em',
+        fontSize: '0.8125rem',
+      },
       button: {
         fontWeight: 600,
         letterSpacing: '0.02em',
+        fontSize: '1.04rem',
       },
     },
     components: {
+      MuiContainer: {
+        defaultProps: {
+          maxWidth: 'xl',
+        },
+        styleOverrides: {
+          root: ({ theme }) => ({
+            /** Menos “vazio” nas laterais: gutters um pouco menores que o default MUI */
+            paddingLeft: theme.spacing(1.75),
+            paddingRight: theme.spacing(1.75),
+            [theme.breakpoints.up('sm')]: {
+              paddingLeft: theme.spacing(2.25),
+              paddingRight: theme.spacing(2.25),
+            },
+            [theme.breakpoints.up('md')]: {
+              paddingLeft: theme.spacing(2.75),
+              paddingRight: theme.spacing(2.75),
+            },
+          }),
+        },
+      },
       MuiAppBar: {
         styleOverrides: {
           root: {
@@ -59,10 +112,53 @@ export function createAppTheme(mode: PaletteMode) {
       MuiButton: {
         defaultProps: { disableElevation: true },
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             textTransform: 'none',
             borderRadius: 10,
+            fontSize: theme.typography.button.fontSize,
+          }),
+          sizeLarge: {
+            fontSize: '1.125rem',
+            minHeight: 52,
+            paddingLeft: '1.35rem',
+            paddingRight: '1.35rem',
+            paddingTop: '0.65rem',
+            paddingBottom: '0.65rem',
           },
+          sizeMedium: {
+            fontSize: '1.0625rem',
+            minHeight: 46,
+            paddingInline: '1.2rem',
+          },
+          sizeSmall: {
+            fontSize: '1rem',
+            minHeight: 39,
+            paddingInline: '1rem',
+          },
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          sizeSmall: {
+            padding: '10px',
+            '& .MuiSvgIcon-root': { fontSize: '1.4rem' },
+          },
+          sizeMedium: {
+            padding: '11px',
+            '& .MuiSvgIcon-root': { fontSize: '1.55rem' },
+          },
+          sizeLarge: {
+            padding: '13px',
+            '& .MuiSvgIcon-root': { fontSize: '1.72rem' },
+          },
+        },
+      },
+      MuiCardContent: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            fontSize: theme.typography.body2.fontSize,
+            lineHeight: theme.typography.body2.lineHeight,
+          }),
         },
       },
       MuiCard: {
@@ -77,7 +173,17 @@ export function createAppTheme(mode: PaletteMode) {
       },
       MuiChip: {
         styleOverrides: {
-          root: { fontWeight: 500 },
+          root: {
+            fontWeight: 500,
+            fontSize: '0.875rem',
+          },
+          sizeMedium: {
+            height: 34,
+          },
+          sizeSmall: {
+            height: 30,
+            fontSize: '0.8375rem',
+          },
         },
       },
     },

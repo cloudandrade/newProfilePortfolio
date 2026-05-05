@@ -8,4 +8,5 @@ export const profile = {
   emailHref: 'mailto:cloud.andrade16@gmail.com',
   linkedinSlug: 'jan-cloude-andrade-582343136',
   linkedinUrl: 'https://www.linkedin.com/in/jan-cloude-andrade-582343136/',
+  githubUrl: 'https://github.com/cloudandrade',
 } as const

@@ -27,7 +27,7 @@ export function Projects() {
       {projects.length === 0 ? (
         <Card className="projects-empty-card" sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}>
           <CardContent className="projects-empty-content">
-            <ConstructionOutlinedIcon color="primary" sx={{ fontSize: 52 }} />
+            <ConstructionOutlinedIcon color="primary" sx={{ fontSize: 58 }} />
             <Typography variant="h6">{t('projects.emptyTitle')}</Typography>
             <Typography variant="body2" color="text.secondary" className="projects-empty-body">
               {t('projects.emptyBody')}
@@ -53,7 +53,7 @@ export function Projects() {
                     <Chip
                       key={item}
                       label={item}
-                      size="small"
+                      size="medium"
                       variant="outlined"
                       color="primary"
                     />
@@ -63,7 +63,7 @@ export function Projects() {
               <CardActions className="projects-actions">
                 {p.liveUrl && (
                   <Button
-                    size="small"
+                    size="medium"
                     href={p.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -74,7 +74,7 @@ export function Projects() {
                 )}
                 {p.repoUrl && (
                   <Button
-                    size="small"
+                    size="medium"
                     href={p.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"

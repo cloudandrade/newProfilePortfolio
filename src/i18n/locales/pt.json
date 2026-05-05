@@ -20,11 +20,20 @@
   },
   "hero": {
     "eyebrow": "Olá, eu sou",
+    "availabilityBadge": "Disponível para novos projetos",
     "ctaContact": "Falar comigo",
     "ctaExperience": "Ver trajetória",
     "scrollHint": "Desça a página",
+    "social": {
+      "github": "Abrir perfil no GitHub",
+      "linkedin": "Abrir perfil no LinkedIn",
+      "email": "Enviar e-mail"
+    },
     "rotatingSubtitles": [
       "Desenvolvedor Fullstack",
+      "Especialista em React",
+      "Engenheiro Node.js",
+      "Construtor de produtos",
       "Arquiteto de Soluções",
       "Tech Lead",
       "Consultor Especialista em IA",

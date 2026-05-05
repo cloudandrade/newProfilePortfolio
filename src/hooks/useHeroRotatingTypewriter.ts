@@ -1,90 +1,94 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
-type Phase = 'typing' | 'holding' | 'deleting'
+/** Mesmos tempos do exemplo: `del ? 40 : 80` e pausa `1400` após completar a palavra. */
+const TYPE_MS = 80
+const DELETE_MS = 40
+const PAUSE_MS = 1400
 
-export type HeroTypewriterOptions = {
+export type HeroTypingOptions = {
   reducedMotion: boolean
-  typeIntervalMs?: number
-  holdMs?: number
-  deleteIntervalMs?: number
 }
 
-/** Ciclo: digita → pausa com cursor piscando → apaga dígito a dígito → próximo título. */
+/**
+ * Lógica equivalente ao hook Lovable:
+ *
+ * ```
+ * const word = ROLES[i % ROLES.length];
+ * const speed = del ? 40 : 80;
+ * setText(del ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1));
+ * if (!del && next === word) espera 1400 → setDel(true);
+ * else if (del && next === "") setDel(false); setI(v => v + 1);
+ * ```
+ *
+ * `ROLES` vem das traduções (`hero.rotatingSubtitles`).
+ * Mantemos um ref no array para não depender de referência nova a cada render do i18n.
+ * A pausa com `text === word` está num ramo próprio para não reaplicar timeouts a cada 80 ms (bug do exemplo original).
+ */
 export function useHeroRotatingTypewriter(
-  linesRaw: unknown,
-  options: HeroTypewriterOptions,
+  rotatingSubtitles: unknown,
+  options: HeroTypingOptions,
 ) {
-  const lines = useMemo(() => {
-    const arr = Array.isArray(linesRaw) ? linesRaw : []
+  const ROLES = useMemo(() => {
+    const arr = Array.isArray(rotatingSubtitles) ? rotatingSubtitles : []
     return arr.filter((s): s is string => typeof s === 'string' && s.trim().length > 0)
-  }, [linesRaw])
+  }, [rotatingSubtitles])
 
-  const linesKey = useMemo(() => lines.join('\u0001'), [lines])
+  const linesKey = useMemo(() => ROLES.join('\u0001'), [ROLES])
 
-  const [lineIndex, setLineIndex] = useState(0)
-  const [len, setLen] = useState(0)
-  const [phase, setPhase] = useState<Phase>('typing')
+  const rolesRef = useRef(ROLES)
+  rolesRef.current = ROLES
 
-  const safeIndex = lines.length ? lineIndex % lines.length : 0
-  const full = lines[safeIndex] ?? ''
+  const [text, setText] = useState('')
+  const [i, setI] = useState(0)
+  const [del, setDel] = useState(false)
 
   useEffect(() => {
-    setLineIndex(0)
-    setLen(0)
-    setPhase('typing')
+    setText('')
+    setI(0)
+    setDel(false)
   }, [linesKey])
 
   useEffect(() => {
-    if (options.reducedMotion || lines.length === 0) return
+    if (options.reducedMotion || rolesRef.current.length === 0) return
 
-    let id: ReturnType<typeof setTimeout>
-    const typeMs = options.typeIntervalMs ?? 52
-    const holdMs = options.holdMs ?? 2800
-    const deleteMs = options.deleteIntervalMs ?? 42
+    const word = rolesRef.current[i % rolesRef.current.length]
 
-    if (phase === 'typing') {
-      if (len < full.length) {
-        id = window.setTimeout(() => setLen((n) => n + 1), typeMs)
-      } else if (full.length > 0) {
-        id = window.setTimeout(() => setPhase('holding'), 0)
-      }
-    } else if (phase === 'holding') {
-      id = window.setTimeout(() => setPhase('deleting'), holdMs)
-    } else if (phase === 'deleting') {
-      if (len > 0) {
-        id = window.setTimeout(() => setLen((n) => n - 1), deleteMs)
-      } else {
-        id = window.setTimeout(() => {
-          setLineIndex((i) => (lines.length ? (i + 1) % lines.length : 0))
-          setPhase('typing')
-        }, 0)
-      }
+    if (!del && text === word && word.length > 0) {
+      const tPause = window.setTimeout(() => setDel(true), PAUSE_MS)
+      return () => window.clearTimeout(tPause)
     }
 
-    return () => window.clearTimeout(id)
-  }, [
-    phase,
-    len,
-    full,
-    full.length,
-    lines.length,
-    options.reducedMotion,
-    options.typeIntervalMs,
-    options.holdMs,
-    options.deleteIntervalMs,
-  ])
+    const speed = del ? DELETE_MS : TYPE_MS
+    const tick = window.setTimeout(() => {
+      const w = rolesRef.current[i % rolesRef.current.length]
+      const next = del
+        ? w.slice(0, Math.max(0, text.length - 1))
+        : w.slice(0, text.length + 1)
+
+      setText(next)
+
+      if (del && next === '') {
+        setDel(false)
+        setI((v) => v + 1)
+      }
+    }, speed)
+
+    return () => window.clearTimeout(tick)
+  }, [text, del, i, linesKey, options.reducedMotion])
+
+  const len = rolesRef.current.length
+  const idx = len ? i % len : 0
+  const activeWord = len ? ROLES[idx] : ''
 
   const displayText =
-    options.reducedMotion || lines.length === 0 ? (lines[0] ?? '') : full.slice(0, len)
+    options.reducedMotion || len === 0 ? (ROLES[0] ?? '') : text
 
-  const blinkCursor = !options.reducedMotion && phase === 'holding'
-  const showCursor = !options.reducedMotion && lines.length > 0
+  const showCursor = !options.reducedMotion && len > 0
 
   return {
     displayText,
-    blinkCursor,
     showCursor,
-    /** Texto completo da linha atual (para aria-label, sem ruído no leitor de tela). */
-    currentLineFull: full,
+    blinkCursor: showCursor,
+    currentLineFull: activeWord,
   }
 }

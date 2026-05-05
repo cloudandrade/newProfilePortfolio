@@ -33,7 +33,7 @@ export function Section({
       id={isTitleAnchor ? undefined : id}
       className={`section-root ${isTitleAnchor ? '' : 'section-scroll-offset'} ${className ?? ''}`}
     >
-      <Container maxWidth="lg">
+      <Container>
         <AnimatedSection>
           <Typography
             variant="h4"

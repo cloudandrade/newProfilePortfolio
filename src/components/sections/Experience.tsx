@@ -68,7 +68,7 @@ export function Experience() {
       <Box
         sx={{
           width: '100%',
-          maxWidth: 'min(1240px, calc(100vw - 56px))',
+          maxWidth: 'min(1480px, calc(100vw - 36px))',
         }}
       >
         <Box className="experience-actions">
@@ -167,16 +167,16 @@ export function Experience() {
                         : `0 0 0 1px ${alpha(accent, 0.08)}`,
                       transition: 'width 320ms ease, border-color 280ms ease, box-shadow 280ms ease',
                       '& .exp-period': {
-                        fontSize: isActive ? 'calc(0.75rem + 6px)' : '0.75rem',
+                        fontSize: isActive ? 'calc(0.75rem + 8px)' : '0.8rem',
                       },
                       '& .exp-role': {
-                        fontSize: isActive ? 'calc(1.25rem + 6px)' : '1.25rem',
+                        fontSize: isActive ? 'calc(1.25rem + 8px)' : '1.3rem',
                       },
                       '& .exp-company': {
-                        fontSize: isActive ? 'calc(0.875rem + 6px)' : '0.875rem',
+                        fontSize: isActive ? 'calc(0.875rem + 8px)' : '0.9375rem',
                       },
                       '& .exp-highlight': {
-                        fontSize: isActive ? 'calc(0.875rem + 6px)' : '0.875rem',
+                        fontSize: isActive ? 'calc(0.875rem + 8px)' : '0.9375rem',
                       },
                     }}
                   >

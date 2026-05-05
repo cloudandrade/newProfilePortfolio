@@ -78,6 +78,7 @@ export function Header() {
   const navButtonSx = (key: (typeof NAV_SECTION_IDS)[number]) => {
     const isActive = active === key
     return {
+      fontSize: { xs: '0.9375rem', md: '1.0625rem' },
       color: isActive ? 'primary.main' : 'text.secondary',
       fontWeight: isActive ? 700 : 500,
       position: 'relative' as const,
@@ -103,12 +104,13 @@ export function Header() {
   const familyName = familyNameParts.join(' ')
 
   const languageSelect = (
-    <FormControl size="small" sx={{ minWidth: { xs: 88, sm: 108 } }}>
+    <FormControl size="medium" sx={{ minWidth: { xs: 94, sm: 118 } }}>
       <Select
         value={currentLang}
         onChange={(e) => void i18n.changeLanguage(e.target.value)}
         aria-label={t('language.label')}
         sx={{
+          fontSize: '1rem',
           color: 'text.primary',
           '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
         }}
@@ -125,9 +127,10 @@ export function Header() {
       <Button
         color="primary"
         variant="outlined"
+        size="medium"
         onClick={handleDownloadResume}
         startIcon={<DownloadOutlinedIcon />}
-        sx={{ textTransform: 'none' }}
+        sx={{ textTransform: 'none', fontSize: '1rem', py: 0.75 }}
         aria-label={t('resume.downloadHint')}
       >
         {t('resume.downloadCta')}
@@ -140,7 +143,7 @@ export function Header() {
       color="inherit"
       onClick={toggleMode}
       aria-label={mode === 'dark' ? t('theme.useLight') : t('theme.useDark')}
-      size="medium"
+      size="large"
     >
       {mode === 'dark' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
     </IconButton>
@@ -184,7 +187,7 @@ export function Header() {
           transition: 'background-color 0.25s ease, border-color 0.25s ease',
         }}
       >
-        <Container maxWidth="lg">
+        <Container>
           <Toolbar
             disableGutters
             className="header-toolbar"
@@ -201,6 +204,7 @@ export function Header() {
                 onClick={() => handleNav('#home')}
                 sx={{
                   fontWeight: 600,
+                  fontSize: { xs: '1.02rem', md: '1.2rem' },
                   letterSpacing: '-0.02em',
                   color: 'text.primary',
                   textTransform: 'none',
@@ -243,6 +247,7 @@ export function Header() {
                 <IconButton
                   color="inherit"
                   edge="end"
+                  size="large"
                   aria-label={t('a11y.openMenu')}
                   onClick={() => setDrawerOpen(true)}
                 >
