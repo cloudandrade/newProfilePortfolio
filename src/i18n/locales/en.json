@@ -22,7 +22,14 @@
     "eyebrow": "Hi, I'm",
     "ctaContact": "Get in touch",
     "ctaExperience": "View experience",
-    "scrollHint": "Scroll down"
+    "scrollHint": "Scroll down",
+    "rotatingSubtitles": [
+      "Fullstack Developer",
+      "Solutions Architect",
+      "Tech Lead",
+      "AI Specialist Consultant",
+      "Project Consultant"
+    ]
   },
   "about": {
     "title": "About",

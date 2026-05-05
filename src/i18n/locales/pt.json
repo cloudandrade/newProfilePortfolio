@@ -22,7 +22,14 @@
     "eyebrow": "Olá, eu sou",
     "ctaContact": "Falar comigo",
     "ctaExperience": "Ver trajetória",
-    "scrollHint": "Desça a página"
+    "scrollHint": "Desça a página",
+    "rotatingSubtitles": [
+      "Desenvolvedor Fullstack",
+      "Arquiteto de Soluções",
+      "Tech Lead",
+      "Consultor Especialista em IA",
+      "Consultor de Projetos"
+    ]
   },
   "about": {
     "title": "Sobre",

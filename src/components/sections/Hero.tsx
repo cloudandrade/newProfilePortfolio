@@ -1,14 +1,15 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import { alpha, Box, Button, Container, Typography, useTheme } from '@mui/material'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
+import { useHeroRotatingTypewriter } from '../../hooks/useHeroRotatingTypewriter'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import './Hero.css'
 
 export function Hero() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const theme = useTheme()
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
@@ -47,6 +48,21 @@ export function Hero() {
   ].join('\n')
   const [heroFirstName, ...heroRestName] = profile.name.split(' ')
   const heroFamilyName = heroRestName.join(' ')
+
+  const rotatingSubtitles = useMemo(() => {
+    const raw = t('hero.rotatingSubtitles', { returnObjects: true })
+    return Array.isArray(raw) ? raw : []
+  }, [t, i18n.language])
+
+  const typewriter = useHeroRotatingTypewriter(rotatingSubtitles, {
+    reducedMotion: reduced,
+    typeIntervalMs: 52,
+    holdMs: 2800,
+    deleteIntervalMs: 42,
+  })
+
+  const mintHighlight = '#6ee7b7'
+  const lightGreen = theme.palette.primary.light
 
   const ctaShapeSx = {
     borderRadius: 1.5,
@@ -129,10 +145,31 @@ export function Hero() {
             </Typography>
             <Typography
               variant="h5"
+              component="h2"
               className="hero-title"
-              sx={{ color: 'primary.main' }}
+              sx={{
+                color: isDark ? lightGreen : theme.palette.primary.main,
+                fontWeight: 600,
+              }}
+              aria-label={typewriter.currentLineFull || undefined}
             >
-              {t('profile.title')}
+              {typewriter.displayText}
+              {typewriter.showCursor ? (
+                <Box
+                  component="span"
+                  aria-hidden
+                  className={
+                    typewriter.blinkCursor
+                      ? 'hero-typewriter-cursor hero-typewriter-cursor--blink'
+                      : 'hero-typewriter-cursor'
+                  }
+                  sx={{
+                    color: isDark ? mintHighlight : theme.palette.primary.dark,
+                  }}
+                >
+                  |
+                </Box>
+              ) : null}
             </Typography>
             <Typography
               variant="body1"
@@ -220,21 +257,27 @@ export function Hero() {
 
           <Box className="hero-media-col">
             <motion.div style={{ y: yPhoto, width: 'min(100%, 520px)' }}>
-              <Box
-                className="hero-card-shell"
-                sx={{
-                  width: '100%',
-                  height: 430,
-                  perspective: '1200px',
-                  pt: 1,
-                  pb: 1,
-                  pl: 1,
-                  pr: 2,
-                  borderRadius: 2,
-                  background: `linear-gradient(135deg, ${alpha(accent, 0.95)}, ${alpha(accent, 0.15)})`,
-                  boxShadow: isDark ? `0 0 90px ${alpha(accent, 0.12)}` : '0 12px 40px rgba(0, 0, 0, 0.08)',
-                }}
-              >
+              <Box className={reduced ? undefined : 'hero-card-float'} sx={{ width: '100%' }}>
+                <Box
+                  className="hero-card-shell"
+                  sx={{
+                    width: '100%',
+                    height: 430,
+                    perspective: '1200px',
+                    pt: 1,
+                    pb: 1,
+                    pl: 1,
+                    pr: 2,
+                    borderRadius: 2,
+                    border: `2px solid ${alpha(lightGreen, isDark ? 0.9 : 0.55)}`,
+                    background: isDark
+                      ? `linear-gradient(155deg, ${alpha(lightGreen, 0.12)} 0%, rgba(7, 18, 14, 0.97) 40%, rgba(4, 11, 9, 1) 100%)`
+                      : `linear-gradient(155deg, ${alpha(lightGreen, 0.28)} 0%, rgba(250, 252, 251, 1) 50%)`,
+                    boxShadow: isDark
+                      ? `0 0 0 1px ${alpha(mintHighlight, 0.22)}, 0 0 48px ${alpha(lightGreen, 0.35)}, 0 0 112px ${alpha(mintHighlight, 0.16)}`
+                      : `0 12px 38px rgba(0, 0, 0, 0.09), 0 0 40px ${alpha(lightGreen, 0.22)}`,
+                  }}
+                >
                 <AnimatePresence mode="wait">
                   {!showCodeSide ? (
                     <Box
@@ -322,6 +365,7 @@ export function Hero() {
                     </Box>
                   )}
                 </AnimatePresence>
+                </Box>
               </Box>
             </motion.div>
           </Box>
