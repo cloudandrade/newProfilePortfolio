@@ -1,14 +1,11 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import { Box, Button, Container, Typography, useTheme } from '@mui/material'
+import { alpha, Box, Button, Container, Typography, useTheme } from '@mui/material'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import './Hero.css'
-
-const gridPattern =
-  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
 
 export function Hero() {
   const { t } = useTranslation()
@@ -20,9 +17,9 @@ export function Hero() {
   const fadeHero = useTransform(scrollY, [0, 360], [1, reduced ? 1 : 0.35])
 
   const isDark = theme.palette.mode === 'dark'
-  const tealGlow = isDark ? 'rgba(0,242,195,0.28)' : 'rgba(0, 242, 195, 0.18)'
-  const warmGlow = isDark ? 'rgba(232,165,152,0.2)' : 'rgba(232, 165, 152, 0.14)'
-  const gridOpacity = isDark ? 0.045 : 0.06
+  const accent = theme.palette.primary.main
+  const glowStrong = isDark ? alpha(accent, 0.28) : alpha(accent, 0.18)
+  const glowSoft = isDark ? alpha(accent, 0.14) : alpha(accent, 0.1)
   const whatsappHref = 'https://wa.me/5571987120712'
   const [showCodeSide, setShowCodeSide] = useState(false)
   const [typedChars, setTypedChars] = useState(0)
@@ -48,6 +45,9 @@ export function Hero() {
     '',
     "console.log('profile ready')",
   ].join('\n')
+  const [heroFirstName, ...heroRestName] = profile.name.split(' ')
+  const heroFamilyName = heroRestName.join(' ')
+
   const ctaShapeSx = {
     borderRadius: 1.5,
     minHeight: 46,
@@ -96,20 +96,13 @@ export function Hero() {
         <Box
           className="hero-glow hero-glow-top"
           sx={{
-            background: `radial-gradient(circle, ${tealGlow} 0%, transparent 68%)`,
+            background: `radial-gradient(circle, ${glowStrong} 0%, transparent 68%)`,
           }}
         />
         <Box
           className="hero-glow hero-glow-bottom"
           sx={{
-            background: `radial-gradient(circle, ${warmGlow} 0%, transparent 68%)`,
-          }}
-        />
-        <Box
-          className="hero-grid-overlay"
-          sx={{
-            opacity: gridOpacity,
-            backgroundImage: gridPattern,
+            background: `radial-gradient(circle, ${glowSoft} 0%, transparent 68%)`,
           }}
         />
       </motion.div>
@@ -124,12 +117,15 @@ export function Hero() {
             >
               {t('hero.eyebrow')}
             </Typography>
-            <Typography
-              variant="h1"
-              className="hero-name"
-              sx={{ color: 'text.primary' }}
-            >
-              {profile.name}
+            <Typography variant="h1" component="h1" className="hero-name">
+              <Box component="span" sx={{ color: 'text.primary' }}>
+                {heroFirstName}
+              </Box>
+              {heroFamilyName ? (
+                <Box component="span" sx={{ color: 'primary.main', ml: { xs: 1, sm: 1.5 } }}>
+                  {heroFamilyName}
+                </Box>
+              ) : null}
             </Typography>
             <Typography
               variant="h5"
@@ -185,8 +181,8 @@ export function Hero() {
                     overflow: 'hidden',
                     transformOrigin: 'center',
                     boxShadow: isDark
-                      ? '0 8px 22px rgba(0, 242, 195, 0.24)'
-                      : '0 8px 20px rgba(0, 242, 195, 0.2)',
+                      ? `0 8px 22px ${alpha(accent, 0.24)}`
+                      : `0 8px 20px ${alpha(accent, 0.2)}`,
                     '&::after': {
                           content: '""',
                           position: 'absolute',
@@ -235,8 +231,8 @@ export function Hero() {
                   pl: 1,
                   pr: 2,
                   borderRadius: 2,
-                  background: 'linear-gradient(135deg, rgba(0,242,195,0.95), rgba(0,242,195,0.15))',
-                  boxShadow: isDark ? '0 0 90px rgba(0, 242, 195, 0.12)' : '0 12px 40px rgba(0, 0, 0, 0.08)',
+                  background: `linear-gradient(135deg, ${alpha(accent, 0.95)}, ${alpha(accent, 0.15)})`,
+                  boxShadow: isDark ? `0 0 90px ${alpha(accent, 0.12)}` : '0 12px 40px rgba(0, 0, 0, 0.08)',
                 }}
               >
                 <AnimatePresence mode="wait">
@@ -317,7 +313,7 @@ export function Hero() {
                             transition={
                               reduced ? undefined : { duration: 0.9, repeat: Infinity, ease: 'linear' }
                             }
-                            sx={{ color: '#43f5bc' }}
+                            sx={{ color: 'primary.light' }}
                           >
                             |
                           </Box>

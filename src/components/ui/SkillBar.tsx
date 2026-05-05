@@ -6,7 +6,7 @@ import { useReducedMotion } from '../../hooks/useReducedMotion'
 import './SkillBar.css'
 
 const GOLD_GRADIENT = 'linear-gradient(90deg, #e8c170, #d4a24a, #b8892e)'
-const TEAL_GRADIENT = 'linear-gradient(90deg, #00f2c3, #00b896)'
+const ACCENT_GRADIENT = 'linear-gradient(90deg, #10b981, #059669)'
 
 type Props = {
   label: string
@@ -54,7 +54,7 @@ export function SkillBar({ label, level, highlight, scaleMax = skillsScaleMax }:
         <motion.div
           className="skillbar-progress"
           style={{
-            background: highlight ? GOLD_GRADIENT : TEAL_GRADIENT,
+            background: highlight ? GOLD_GRADIENT : ACCENT_GRADIENT,
             boxShadow: highlight ? '0 0 12px rgba(212, 162, 74, 0.35)' : undefined,
           }}
           initial={{ width: reduced ? `${pct}%` : '0%' }}

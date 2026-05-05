@@ -1,9 +1,10 @@
-import { Box, Chip, Typography } from '@mui/material'
+import { alpha, Box, Chip, Typography, useTheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Section } from '../layout/Section'
 import './About.css'
 
 export function About() {
+  const theme = useTheme()
   const { t } = useTranslation()
   const specs = t('profile.specializations', { returnObjects: true }) as string[]
 
@@ -38,7 +39,7 @@ export function About() {
             label={s}
             variant="outlined"
             color="primary"
-            sx={{ borderColor: 'rgba(0, 242, 195, 0.35)' }}
+            sx={{ borderColor: alpha(theme.palette.primary.main, 0.35) }}
           />
         ))}
       </Box>

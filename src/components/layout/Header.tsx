@@ -82,6 +82,7 @@ export function Header() {
       fontWeight: isActive ? 700 : 500,
       position: 'relative' as const,
       textTransform: 'none' as const,
+      whiteSpace: 'nowrap' as const,
       '&:hover': { color: 'text.primary' },
       '&::after': isActive
         ? {
@@ -89,7 +90,7 @@ export function Header() {
             position: 'absolute',
             left: theme.spacing(1),
             right: theme.spacing(1),
-            bottom: 4,
+            bottom: 2,
             height: 2,
             borderRadius: 1,
             bgcolor: 'primary.main',
@@ -98,14 +99,35 @@ export function Header() {
     }
   }
 
-  const downloadControl = (
+  const [givenName, ...familyNameParts] = profile.name.split(' ')
+  const familyName = familyNameParts.join(' ')
+
+  const languageSelect = (
+    <FormControl size="small" sx={{ minWidth: { xs: 88, sm: 108 } }}>
+      <Select
+        value={currentLang}
+        onChange={(e) => void i18n.changeLanguage(e.target.value)}
+        aria-label={t('language.label')}
+        sx={{
+          color: 'text.primary',
+          '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
+        }}
+      >
+        <MenuItem value="en">{t('language.en')}</MenuItem>
+        <MenuItem value="es">{t('language.es')}</MenuItem>
+        <MenuItem value="pt">{t('language.pt')}</MenuItem>
+      </Select>
+    </FormControl>
+  )
+
+  const downloadButton = (
     <Tooltip title={t('resume.downloadHint')} arrow>
       <Button
         color="primary"
         variant="outlined"
         onClick={handleDownloadResume}
         startIcon={<DownloadOutlinedIcon />}
-        sx={{ ml: 0.5, textTransform: 'none' }}
+        sx={{ textTransform: 'none' }}
         aria-label={t('resume.downloadHint')}
       >
         {t('resume.downloadCta')}
@@ -113,26 +135,27 @@ export function Header() {
     </Tooltip>
   )
 
-  const controls = (
+  const themeToggle = (
+    <IconButton
+      color="inherit"
+      onClick={toggleMode}
+      aria-label={mode === 'dark' ? t('theme.useLight') : t('theme.useDark')}
+      size="medium"
+    >
+      {mode === 'dark' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+    </IconButton>
+  )
+
+  const toolbarActions = (
     <Box className="header-controls">
-      {downloadControl}
-      <IconButton
-        color="inherit"
-        onClick={toggleMode}
-        aria-label={mode === 'dark' ? t('theme.useLight') : t('theme.useDark')}
-        size="medium"
-      >
-        {mode === 'dark' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
-      </IconButton>
+      {downloadButton}
+      {languageSelect}
+      {themeToggle}
     </Box>
   )
 
-  const desktopNav = (
-    <Box
-      component="nav"
-      className="header-desktop-nav"
-      aria-label={t('a11y.mainNav')}
-    >
+  const navLinks = (
+    <Box component="nav" className="header-nav-links" aria-label={t('a11y.mainNav')}>
       {NAV_SECTION_IDS.map((key) => (
         <Button
           key={key}
@@ -143,22 +166,6 @@ export function Header() {
           {t(`nav.${key}`)}
         </Button>
       ))}
-      <FormControl size="small" sx={{ minWidth: 108, ml: 0.5 }}>
-        <Select
-          value={currentLang}
-          onChange={(e) => void i18n.changeLanguage(e.target.value)}
-          aria-label={t('language.label')}
-          sx={{
-            color: 'text.primary',
-            '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
-          }}
-        >
-          <MenuItem value="en">{t('language.en')}</MenuItem>
-          <MenuItem value="es">{t('language.es')}</MenuItem>
-          <MenuItem value="pt">{t('language.pt')}</MenuItem>
-        </Select>
-      </FormControl>
-      {controls}
     </Box>
   )
 
@@ -178,31 +185,61 @@ export function Header() {
         }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters className="header-toolbar">
-            <Button
-              color="inherit"
-              onClick={() => handleNav('#home')}
+          <Toolbar
+            disableGutters
+            className="header-toolbar"
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: 'minmax(0,1fr) auto', md: '1fr auto 1fr' },
+              alignItems: 'center',
+              columnGap: { xs: 1, md: 2 },
+            }}
+          >
+            <Box sx={{ justifySelf: 'start', minWidth: 0 }}>
+              <Button
+                color="inherit"
+                onClick={() => handleNav('#home')}
+                sx={{
+                  fontWeight: 600,
+                  letterSpacing: '-0.02em',
+                  color: 'text.primary',
+                  textTransform: 'none',
+                  maxWidth: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {givenName}
+                {familyName ? (
+                  <Box
+                    component="span"
+                    className="header-last-name"
+                    sx={{ color: 'primary.main', ml: 0.5 }}
+                  >
+                    {familyName}
+                  </Box>
+                ) : null}
+              </Button>
+            </Box>
+            <Box
               sx={{
-                fontWeight: 600,
-                letterSpacing: '-0.02em',
-                color: 'text.primary',
-                textTransform: 'none',
+                display: { xs: 'none', md: 'flex' },
+                justifyContent: 'center',
+                justifySelf: 'center',
               }}
             >
-              {profile.name.split(' ')[0]}
-              <Box
-                component="span"
-                sx={{ color: 'primary.main', ml: 0.5 }}
-                className="header-last-name"
-              >
-                Andrade
-              </Box>
-            </Button>
-            {isMd ? (
-              desktopNav
-            ) : (
-              <Box className="header-mobile-controls">
-                {controls}
+              {navLinks}
+            </Box>
+            <Box
+              sx={{
+                justifySelf: 'end',
+                display: 'flex',
+                alignItems: 'center',
+                gap: { xs: 0.25, sm: 0.5 },
+              }}
+            >
+              {toolbarActions}
+              {!isMd ? (
                 <IconButton
                   color="inherit"
                   edge="end"
@@ -211,8 +248,8 @@ export function Header() {
                 >
                   <MenuIcon />
                 </IconButton>
-              </Box>
-            )}
+              ) : null}
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>

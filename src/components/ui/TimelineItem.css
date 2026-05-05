@@ -9,7 +9,7 @@
 }
 
 .timeline-item-dot {
-  @apply mt-1 size-3 shrink-0 rounded-full ring-2 ring-[#00f2c3]/80;
+  @apply mt-1 size-3 shrink-0 rounded-full ring-2 ring-[#10b981]/80;
 }
 
 .timeline-item-line {
@@ -41,5 +41,5 @@
 }
 
 .timeline-item-highlight {
-  @apply relative pl-4 text-sm leading-relaxed before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-[#00f2c3]/60 before:content-[''];
+  @apply relative pl-4 text-sm leading-relaxed before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-[#10b981]/60 before:content-[''];
 }

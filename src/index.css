@@ -6,10 +6,10 @@
 @theme {
   --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --color-portfolio-accent: #00f2c3;
+  --color-portfolio-accent: #10b981;
   --color-portfolio-warm: #e8a598;
-  --color-portfolio-bg: #121214;
-  --color-portfolio-surface: #1a1a1f;
+  --color-portfolio-bg: #050a0a;
+  --color-portfolio-surface: #0e1815;
 }
 
 @layer base {
@@ -33,7 +33,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #00f2c3;
+    outline: 2px solid #10b981;
     outline-offset: 3px;
   }
 

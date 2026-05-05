@@ -1,6 +1,6 @@
 import { createTheme, type PaletteMode } from '@mui/material/styles'
 
-const accent = '#00f2c3'
+const accent = '#10b981'
 
 export function createAppTheme(mode: PaletteMode) {
   const isDark = mode === 'dark'
@@ -11,21 +11,23 @@ export function createAppTheme(mode: PaletteMode) {
       mode,
       primary: {
         main: accent,
-        contrastText: '#0a0a0b',
+        light: '#34d399',
+        dark: '#059669',
+        contrastText: '#050a0a',
       },
       secondary: {
         main: '#e8a598',
         contrastText: '#1a1010',
       },
       background: {
-        default: isDark ? '#121214' : '#f4f4f6',
-        paper: isDark ? 'rgba(26, 26, 31, 0.92)' : 'rgba(255, 255, 255, 0.92)',
+        default: isDark ? '#050a0a' : '#f4f4f6',
+        paper: isDark ? 'rgba(12, 22, 19, 0.92)' : 'rgba(255, 255, 255, 0.92)',
       },
       text: {
         primary: isDark ? '#ececec' : '#16161a',
         secondary: isDark ? 'rgba(236, 236, 236, 0.68)' : 'rgba(22, 22, 26, 0.62)',
       },
-      divider: isDark ? 'rgba(0, 242, 195, 0.12)' : 'rgba(0, 0, 0, 0.08)',
+      divider: isDark ? 'rgba(16, 185, 129, 0.14)' : 'rgba(0, 0, 0, 0.08)',
     },
     shape: { borderRadius: 12 },
     typography: {

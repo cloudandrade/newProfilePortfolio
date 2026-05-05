@@ -1,7 +1,7 @@
 @reference "../../index.css";
 
 .hero-root {
-  @apply relative flex min-h-[100svh] items-center overflow-hidden scroll-mt-[72px];
+  @apply relative flex min-h-[100svh] items-center overflow-hidden scroll-mt-[92px];
 }
 
 .hero-bg-layer {
@@ -18,10 +18,6 @@
 
 .hero-glow-bottom {
   @apply bottom-[-25%] left-[-25%] h-[65vmin] w-[65vmin];
-}
-
-.hero-grid-overlay {
-  @apply absolute inset-0;
 }
 
 .hero-container {

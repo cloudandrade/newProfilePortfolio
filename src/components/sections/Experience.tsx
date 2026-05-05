@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
+import { alpha, Box, Button, Typography, useTheme } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { educationOrder } from '../../data/educationOrder'
@@ -8,6 +8,8 @@ import { ClientsCarousel } from './ClientsCarousel'
 import './Experience.css'
 
 export function Experience() {
+  const theme = useTheme()
+  const accent = theme.palette.primary.main
   const { t } = useTranslation()
   const [activeIndex, setActiveIndex] = useState(0)
   const workScrollRef = useRef<HTMLDivElement | null>(null)
@@ -108,8 +110,10 @@ export function Experience() {
                       borderRadius: '999px',
                       border: 0,
                       cursor: 'pointer',
-                      bgcolor: isActive ? '#00f2c3' : 'background.default',
-                      boxShadow: isActive ? '0 0 0 2px rgba(0,242,195,0.65)' : '0 0 0 2px rgba(0,242,195,0.25)',
+                      bgcolor: isActive ? 'primary.main' : 'background.default',
+                      boxShadow: isActive
+                        ? `0 0 0 2px ${alpha(accent, 0.65)}`
+                        : `0 0 0 2px ${alpha(accent, 0.25)}`,
                       transition: 'all 220ms ease',
                     }}
                   />
@@ -157,10 +161,10 @@ export function Experience() {
                       width: cardWidth,
                       ml: 1,
                       bgcolor: 'rgba(12, 16, 27, 0.92)',
-                      borderColor: isActive ? 'rgba(0, 242, 195, 0.58)' : 'rgba(0, 242, 195, 0.28)',
+                      borderColor: isActive ? alpha(accent, 0.58) : alpha(accent, 0.28),
                       boxShadow: isActive
-                        ? '0 0 0 1px rgba(0, 242, 195, 0.2), 0 16px 34px rgba(0, 242, 195, 0.08)'
-                        : '0 0 0 1px rgba(0, 242, 195, 0.08)',
+                        ? `0 0 0 1px ${alpha(accent, 0.2)}, 0 16px 34px ${alpha(accent, 0.08)}`
+                        : `0 0 0 1px ${alpha(accent, 0.08)}`,
                       transition: 'width 320ms ease, border-color 280ms ease, box-shadow 280ms ease',
                       '& .exp-period': {
                         fontSize: isActive ? 'calc(0.75rem + 6px)' : '0.75rem',
