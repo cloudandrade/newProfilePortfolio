@@ -13,12 +13,12 @@ import {
   Typography,
   useTheme,
 } from '@mui/material'
-import type { SxProps } from '@mui/material/styles'
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { HeroMediaBlock } from './HeroMediaBlock'
 import './Hero.css'
 
 function mapNameLetters(str: string, keyPrefix: string) {
@@ -52,34 +52,19 @@ function mapNameLetters(str: string, keyPrefix: string) {
   ))
 }
 
-const HERO_MEDIA_BADGES: { label: string; sx: SxProps }[] = [
-  { label: 'React', sx: { top: 14, left: { xs: 4, md: -20 } } },
-  {
-    label: 'TS',
-    sx: {
-      top: '33%',
-      right: { xs: -14, md: -20 },
-      transform: 'translateY(-50%)',
-    },
-  },
-  { label: 'Node', sx: { bottom: 36, left: { xs: 0, md: -26 } } },
-  { label: 'Python', sx: { bottom: -18, right: { xs: '8%', md: 36 } } },
-]
-
 export function Hero() {
   const { t, i18n } = useTranslation()
   const theme = useTheme()
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
   const yBg = useTransform(scrollY, [0, 500], [0, reduced ? 0 : 140])
-  const yPhoto = useTransform(scrollY, [0, 500], [0, reduced ? 0 : 70])
   const fadeHero = useTransform(scrollY, [0, 360], [1, reduced ? 1 : 0.35])
 
   const isDark = theme.palette.mode === 'dark'
   const accent = theme.palette.primary.main
   const glowStrong = isDark ? alpha(accent, 0.28) : alpha(accent, 0.18)
   const glowSoft = isDark ? alpha(accent, 0.14) : alpha(accent, 0.1)
-  const whatsappHref = 'https://wa.me/5571987120712'
+  const whatsappHref = profile.whatsappHref
   const [showCodeSide, setShowCodeSide] = useState(false)
   const [typedChars, setTypedChars] = useState(0)
   const hobbies = t('profile.terminal.hobbies', { returnObjects: true }) as string[]
@@ -137,7 +122,6 @@ export function Hero() {
 
   const rotatingRoles = useTyping()
 
-  const mintHighlight = '#6ee7b7'
   const lightGreen = theme.palette.primary.light
 
   const ctaShapeSx = {
@@ -440,163 +424,16 @@ export function Hero() {
 
           <Box className="hero-media-col" sx={{ position: 'relative' }}>
             <Box sx={{ position: 'relative', zIndex: 1, mx: 'auto', width: 'min(100%, 520px)' }}>
-              <Box
-                aria-hidden
-                sx={{
-                  position: 'absolute',
-                  inset: { xs: -16, md: -24 },
-                  zIndex: 0,
-                  borderRadius: '2rem',
-                  pointerEvents: 'none',
-                  opacity: showCodeSide ? 0.45 : 1,
-                  transition: 'opacity 0.4s ease',
-                  background: `linear-gradient(145deg, ${alpha(accent, 0.42)} 0%, ${alpha(accent, 0.1)} 48%, transparent 100%)`,
-                  filter: 'blur(38px)',
-                }}
-              />
-              <motion.div style={{ position: 'relative', zIndex: 1, y: yPhoto, width: '100%' }}>
-              <Box
-                className={reduced ? undefined : 'hero-media-float'}
-                sx={{ position: 'relative', width: '100%' }}
-              >
-                <Box
-                  className="hero-card-shell"
-                  sx={{
-                    width: '100%',
-                    height: 458,
-                    perspective: '1200px',
-                    pt: 1,
-                    pb: 1,
-                    pl: 1,
-                    pr: 2,
-                    borderRadius: 2,
-                    border: `2px solid ${alpha(lightGreen, isDark ? 0.9 : 0.55)}`,
-                    background: isDark
-                      ? `linear-gradient(155deg, ${alpha(lightGreen, 0.12)} 0%, rgba(7, 18, 14, 0.97) 40%, rgba(4, 11, 9, 1) 100%)`
-                      : `linear-gradient(155deg, ${alpha(lightGreen, 0.28)} 0%, rgba(250, 252, 251, 1) 50%)`,
-                    boxShadow: isDark
-                      ? `0 0 0 1px ${alpha(mintHighlight, 0.22)}, 0 0 48px ${alpha(lightGreen, 0.35)}, 0 0 112px ${alpha(mintHighlight, 0.16)}`
-                      : `0 12px 38px rgba(0, 0, 0, 0.09), 0 0 40px ${alpha(lightGreen, 0.22)}`,
-                  }}
-                >
-                <AnimatePresence mode="wait">
-                  {!showCodeSide ? (
-                    <Box
-                      key="photo-card"
-                      component={motion.div}
-                      initial={reduced ? { opacity: 1 } : { rotateY: -180, opacity: 0.45 }}
-                      animate={{ rotateY: 0, opacity: 1 }}
-                      exit={reduced ? { opacity: 0 } : { rotateY: 180, opacity: 0.45 }}
-                      transition={{ duration: reduced ? 0.25 : 0.75, ease: [0.22, 1, 0.36, 1] }}
-                      sx={{
-                        position: 'absolute',
-                        inset: '8px 16px 8px 8px',
-                        width: 'calc(100% - 84px)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: '100%',
-                          borderRadius: 2,
-                          overflow: 'hidden',
-                        }}
-                      >
-                        <Box
-                          component="img"
-                          src={profile.photoSrc}
-                          alt={profile.name}
-                          className="hero-photo"
-                          width={280}
-                          height={373}
-                          fetchPriority="high"
-                        />
-                      </Box>
-                    </Box>
-                  ) : (
-                    <Box
-                      key="code-card"
-                      component={motion.div}
-                      initial={reduced ? { opacity: 1 } : { rotateY: -180, opacity: 0.45 }}
-                      animate={{ rotateY: 0, opacity: 1 }}
-                      exit={reduced ? { opacity: 0 } : { rotateY: 180, opacity: 0.45 }}
-                      transition={{ duration: reduced ? 0.25 : 0.75, ease: [0.22, 1, 0.36, 1] }}
-                      sx={{
-                        position: 'absolute',
-                        inset: '8px 16px 8px 8px',
-                        width: 'calc(100% - 84px)',
-                        right: 16,
-                        left: 'auto',
-                        borderRadius: 2,
-                        bgcolor: '#23262d',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: '100%',
-                          borderRadius: 2,
-                          bgcolor: '#1b1f27',
-                          border: '1px solid rgba(255, 255, 255, 0.06)',
-                          p: 3,
-                          overflow: 'hidden',
-                          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                          color: '#b7ffd8',
-                          fontSize: '0.9375rem',
-                          lineHeight: 1.65,
-                          whiteSpace: 'pre-wrap',
-                        }}
-                      >
-                        {codeSnippet.slice(0, typedChars)}
-                        {showCodeSide && (
-                          <Box
-                            component={motion.span}
-                            animate={reduced ? undefined : { opacity: [1, 0, 1] }}
-                            transition={
-                              reduced ? undefined : { duration: 0.9, repeat: Infinity, ease: 'linear' }
-                            }
-                            sx={{ color: 'primary.light' }}
-                          >
-                            |
-                          </Box>
-                        )}
-                      </Box>
-                    </Box>
-                  )}
-                </AnimatePresence>
-                </Box>
-
-              {!showCodeSide &&
-                HERO_MEDIA_BADGES.map((b) => (
-                  <Box
-                    key={b.label}
-                    component="span"
-                    aria-hidden
-                    sx={{
-                      ...b.sx,
-                      position: 'absolute',
-                      zIndex: 3,
-                      px: 1.4,
-                      py: 0.72,
-                      borderRadius: 999,
-                      border: `1px solid ${alpha(accent, 0.42)}`,
-                      bgcolor: alpha(isDark ? '#070f0d' : '#ffffff', isDark ? 0.94 : 0.88),
-                      backdropFilter: 'blur(12px)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.8125rem',
-                      fontWeight: 600,
-                      color: mintHighlight,
-                      boxShadow: isDark ? '0 6px 24px rgba(0, 0, 0, 0.42)' : '0 6px 20px rgba(0, 0, 0, 0.1)',
-                      pointerEvents: 'none',
-                    }}
-                  >
-                    {b.label}
-                  </Box>
-                ))}
-              </Box>
-              </motion.div>
+              <div className="relative z-[1] w-full flex justify-center">
+                <HeroMediaBlock
+                  photoSrc={profile.photoSrc}
+                  photoAlt={profile.name}
+                  showCodeSide={showCodeSide}
+                  codeSnippet={codeSnippet}
+                  typedChars={typedChars}
+                  reducedMotion={reduced}
+                />
+              </div>
             </Box>
           </Box>
         </Box>

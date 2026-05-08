@@ -10,6 +10,52 @@
   --color-portfolio-warm: #e8a598;
   --color-portfolio-bg: #050a0a;
   --color-portfolio-surface: #0e1815;
+
+  /** Aliases Tailwind úteis (from-primary/bg-card…) */
+  --color-primary: #10b981;
+  --color-card: #131c19;
+
+  --shadow-soft: 0 14px 40px rgb(0 0 0 / 0.45), 0 0 48px rgb(16 185 129 / 0.12);
+
+  --animate-float: hero-float-soft 5s ease-in-out infinite;
+  --animate-scale-in: hero-scale-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-hero-terminal-caret: hero-terminal-caret-blink 0.9s steps(2, jump-none)
+    infinite;
+
+  @keyframes hero-float-soft {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+      transform: translate3d(0, -12px, 0);
+    }
+  }
+
+  @keyframes hero-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes hero-terminal-caret-blink {
+    0%,
+    45% {
+      opacity: 1;
+    }
+
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {
@@ -30,6 +76,15 @@
     html {
       scroll-behavior: auto;
     }
+
+    .animate-float,
+    .animate-scale-in {
+      animation: none !important;
+    }
+
+    .animate-hero-terminal-caret {
+      animation: none !important;
+    }
   }
 
   :focus-visible {
@@ -37,4 +92,22 @@
     outline-offset: 3px;
   }
 
+}
+
+@layer components {
+  /** Moldura com brilho (cartão foto + terminal Hero) */
+  .glow-card {
+    border: 1px solid rgb(16 185 129 / 0.35);
+    background: linear-gradient(
+      155deg,
+      rgb(16 185 129 / 0.1),
+      rgb(5 14 11 / 0.96),
+      rgb(4 11 9 / 0.99)
+    );
+    box-shadow:
+      0 0 0 1px rgb(110 231 183 / 0.14),
+      0 0 44px rgb(16 185 129 / 0.22),
+      0 0 90px rgb(110 231 183 / 0.08),
+      inset 0 1px 0 rgb(110 231 183 / 0.06);
+  }
 }

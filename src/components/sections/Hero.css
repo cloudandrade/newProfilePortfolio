@@ -104,28 +104,6 @@
   }
 }
 
-/** Foto + moldura + tags tech: um único movimento para cima/baixo */
-@keyframes hero-media-float-y {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
-.hero-media-float {
-  animation: hero-media-float-y 3.8s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-media-float {
-    animation: none;
-  }
-}
-
 .hero-objective {
   @apply mt-6 max-w-xl leading-relaxed;
 }
@@ -136,14 +114,6 @@
 
 .hero-media-col {
   @apply order-1 flex justify-center md:order-2 md:col-span-5 md:justify-end;
-}
-
-.hero-card-shell {
-  @apply relative rounded-2xl;
-}
-
-.hero-photo {
-  @apply block h-full w-full rounded-xl object-cover;
 }
 
 .hero-scroll-hint {

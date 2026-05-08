@@ -71,7 +71,7 @@
       "Infraestructura (Docker, Bitbucket, GitHub Actions, Jenkins, Heroku, CircleCI, Netlify, Vercel, AWS, Google Cloud)",
       "Pipelines de CI/CD"
     ],
-    "address": "Rua Caraíva, 9595, cond. Solar de Maiorca, apto 504, bloque 2 — Abrantes, Camaçari — BA, Brasil"
+    "address": "Abrantes, Camaçari, BA — Brasil"
   },
   "experience": {
     "title": "Experiencia y formación",
@@ -246,12 +246,56 @@
   "contact": {
     "title": "Contacto",
     "subtitle": "Hablemos de oportunidades, producto y tecnología.",
-    "linkedinLabel": "LinkedIn"
+    "linkedinLabel": "LinkedIn",
+    "portfolio": "Portafolio"
   },
   "resume": {
     "downloadCta": "Descargar CV",
     "downloadHint": "download curriculum",
-    "sectionSummary": "Resumen profesional"
+    "sectionSummary": "Resumen profesional",
+    "sectionProfessionalSummary": "RESUMEN PROFESIONAL",
+    "sectionCoreSkills": "RESUMEN DE COMPETENCIAS",
+    "sectionExperience": "EXPERIENCIA PROFESIONAL",
+    "sectionProjects": "PROYECTOS",
+    "sectionEducation": "FORMACIÓN",
+    "sectionCertifications": "CERTIFICACIONES",
+    "sectionLanguages": "IDIOMAS",
+    "sectionAdditional": "INFORMACIÓN ADICIONAL",
+    "technologiesLabel": "Tecnologías",
+    "keywordHeadline": "Ingeniero Fullstack | TypeScript | JavaScript | React | Node.js | Angular | AWS | GCP | Serverless | Desarrollo asistido por IA",
+    "contactLinkedIn": "LinkedIn",
+    "contactGithub": "GitHub",
+    "headlineRole": "Software Engineer / Tech Lead",
+    "educationAluraPdfSummary": "Tramo intensivo en ingeniería de software (microservicios, CI/CD, liderazgo ágil, QA y Tech Lead — múltiples certificados).",
+    "atsProfessionalSummary": [
+      "Ingeniero de software con experiencia en plataformas web, sistemas corporativos y productos fintech, usando TypeScript, JavaScript, React, Angular, Node.js, Java, Python y stacks serverless en AWS y entornos híbridos.",
+      "Cómodo en todo el ciclo de entrega: desarrollo, correcciones, refinamiento con producto y liderazgo técnico, revisión de código, CI/CD y despliegues orientados a nube. Enfoque en arquitectura clara, rendimiento, mantenibilidad e IA asistida de forma pragmática.",
+      "Experiencia en equipos ágiles (Scrum), colaboración multifuncional, documentación y soporte a producción con stakeholders distribuidos."
+    ],
+    "coreSkillsExtra": [
+      "REST APIs",
+      "Microservicios",
+      "Agile / Scrum",
+      "Code review",
+      "CI/CD",
+      "Arquitectura limpia",
+      "Patrones de diseño",
+      "Entrega full stack"
+    ],
+    "languageLines": [
+      "Portugués — Nativo",
+      "Inglés — Intermediate High (ACTFL, 2015)"
+    ],
+    "additionalInfoBullets": [
+      "Experiencia con desarrollo asistido por IA y herramientas como Cursor en entregas reales.",
+      "Cómodo mentorando, alineando con tech leads y mejorando prácticas de ingeniería."
+    ],
+    "pdfSkillCategories": {
+      "languages": "Lenguajes & marcado",
+      "frameworks": "Frameworks & runtimes",
+      "cloud": "Nube, DevOps & herramientas",
+      "engineering": "Prácticas de ingeniería & calidad"
+    }
   },
   "footer": {
     "stack": "Tailwind CSS.",
