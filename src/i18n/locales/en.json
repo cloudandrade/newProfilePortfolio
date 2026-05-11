@@ -85,12 +85,11 @@
     "clientsCarouselNote": "Mentioning clients is for factual career context. Contracts and NDAs may limit what you can disclose — review your agreements when in doubt.",
     "items": {
       "bankme": {
-        "role": "Senior Fullstack Software Engineer",
+        "role": "Senior Fullstack Software Engineer / Tech Lead",
         "company": "Bankme",
         "period": "Jul 2025 — Present",
         "highlights": [
-          "Full-stack development for Bankme’s financial products and platforms.",
-          "Focus on quality, delivery, and modern web stacks in a fintech context."
+          "Technical reference for the fintech’s credit operations team, leading strategic deliveries, resolving critical incidents, and evolving flows essential to the business. Main technical focal point for the squad and later Tech Lead, supporting technical decisions, refinements, and steering the team’s deliveries."
         ]
       },
       "illa-livelo": {
@@ -98,17 +97,15 @@
         "company": "Illa / Livelo",
         "period": "Jul 2024 — Jun 2025",
         "highlights": [
-          "Built and evolved features and fixed bugs in corporate applications.",
-          "Front-end with React and Angular."
+          "Worked on the team behind strategic Livelo campaigns, shipping improvements for Livelo Anniversary, Black Friday, and Clube Livelo—features that stayed live and integrated across the platform. Contributed actively to promotional and subscription experiences, supporting engagement, retention, and commercial outcomes."
         ]
       },
       "squadra-shell": {
         "role": "Senior Software Engineer",
-        "company": "Squadra / Shell",
+        "company": "Squadra / Shellbox",
         "period": "May 2022 — Jul 2024",
         "highlights": [
-          "Development and maintenance of systems in the Shellbox context.",
-          "Stack: Angular, React, Node.js, Java, Python, AWS Lambda, and serverless."
+          "Among the first teams evolving Shell Box, delivering strategic loyalty features, digital payments, and platform integrations. Drove RFID fueling and the Shell Box + Sem Parar automatic-payment integration, improving fast refueling experiences and customer loyalty."
         ]
       },
       "add": {
@@ -116,33 +113,40 @@
         "company": ".Add",
         "period": "Apr 2021 — Apr 2022",
         "highlights": [
-          "Features and fixes in corporate applications.",
-          "Angular, Node.js, AWS Lambda, and serverless."
+          "Corporate systems: Angular front end and Node.js with AWS Lambda/serverless. Feature work, fixes, and hardening of flows and endpoints."
         ]
       },
       "stefanini": {
         "role": "Mid-level Developer",
         "company": "Stefanini",
         "period": "Jul 2020 — Apr 2021",
-        "highlights": ["Development and maintenance of corporate systems."]
+        "highlights": [
+          "Automotive client: maintenance and evolution of corporate systems. SLA-driven support and incremental delivery with on-site/remote collaboration."
+        ]
       },
       "capgemini": {
         "role": "Mid-level Developer",
         "company": "Capgemini",
         "period": "Jun 2019 — Jul 2020",
-        "highlights": ["Development and maintenance of corporate systems."]
+        "highlights": [
+          "Large corporate systems; structured releases and steady delivery. Support and fixes coordinated with multidisciplinary teams."
+        ]
       },
       "cronsolucoes": {
         "role": "Mid-level Developer",
         "company": "CronSoluções",
         "period": "Jun 2017 — Jul 2019",
-        "highlights": ["Development and maintenance of corporate systems."]
+        "highlights": [
+          "Long-lived internal systems in Java/SQL/JavaScript. From sustainment to owning features and integrations."
+        ]
       },
       "abefs": {
         "role": "Junior Developer",
         "company": "ABEFS",
         "period": "Jun 2016 — Jun 2017",
-        "highlights": ["Start of my professional journey in software development."]
+        "highlights": [
+          "First deliveries in Java/SQL within a project team. Foundations in clean code, predictability, and teamwork."
+        ]
       }
     }
   },
@@ -232,7 +236,13 @@
       "nosql": "NoSQL",
       "git": "Git",
       "tests": "Unit testing",
-      "python": "Python"
+      "python": "Python",
+      "terraform": "Terraform",
+      "gcp": "GCP",
+      "aws": "AWS",
+      "jenkins": "Jenkins",
+      "vercel": "Vercel",
+      "github-actions": "GitHub Actions"
     }
   },
   "projects": {
@@ -261,11 +271,10 @@
     "sectionCertifications": "CERTIFICATIONS",
     "sectionLanguages": "LANGUAGES",
     "sectionAdditional": "ADDITIONAL INFORMATION",
-    "technologiesLabel": "Technologies",
     "keywordHeadline": "Fullstack Engineer | TypeScript | JavaScript | React | Node.js | Angular | AWS | GCP | Serverless | AI-assisted development",
     "contactLinkedIn": "LinkedIn",
     "contactGithub": "GitHub",
-    "headlineRole": "Software Engineer / Tech Lead",
+    "headlineRole": "Software Engineer / Tech Lead / JavaScript & TypeScript Specialist",
     "educationAluraPdfSummary": "Intensive software engineering track covering microservices, CI/CD, agile leadership, QA, and Tech Lead practices (multiple certificates).",
     "atsProfessionalSummary": [
       "Software engineer with strong experience building and evolving web platforms, corporate systems, and fintech products using TypeScript, JavaScript, React, Angular, Node.js, Java, Python, and serverless stacks on AWS and hybrid environments.",
@@ -273,8 +282,9 @@
       "Solid background in agile teams (Scrum), cross-functional collaboration, documentation habits, and production support for distributed stakeholders."
     ],
     "coreSkillsExtra": [
-      "REST APIs",
+      "GenAI & RAG",
       "Microservices",
+      "REST APIs",
       "Agile / Scrum",
       "Code review",
       "CI/CD",

@@ -34,4 +34,10 @@ export const skills: SkillRow[] = [
   { id: 'python', level: 7 },
   { id: 'sql', level: 7 },
   { id: 'nosql', level: 6 },
+  { id: 'terraform', level: 6 },
+  { id: 'gcp', level: 6 },
+  { id: 'aws', level: 6 },
+  { id: 'jenkins', level: 6 },
+  { id: 'vercel', level: 6 },
+  { id: 'github-actions', level: 6 },
 ]

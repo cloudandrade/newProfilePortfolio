@@ -13,7 +13,20 @@ export const resumePdfSkillGroupDefs: ReadonlyArray<{
   },
   {
     categoryKey: 'resume.pdfSkillCategories.cloud',
-    skillIds: ['cloud', 'docker', 'iac', 'pipelines', 'serverless', 'git'],
+    skillIds: [
+      'terraform',
+      'gcp',
+      'aws',
+      'docker',
+      'jenkins',
+      'vercel',
+      'github-actions',
+      'cloud',
+      'iac',
+      'pipelines',
+      'serverless',
+      'git',
+    ],
   },
   {
     categoryKey: 'resume.pdfSkillCategories.engineering',

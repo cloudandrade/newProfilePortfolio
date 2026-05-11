@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf'
 import type { TFunction } from 'i18next'
+import { portfolioEnabled } from '../../data/profile'
 import type { ResumePdfEducationEntry } from './resumeTemplate'
 import { buildResumeTemplate } from './resumeTemplate'
 
@@ -27,7 +28,7 @@ export function generateResumePdf(t: TFunction) {
   const doc = new jsPDF({ unit: 'pt', format: 'a4' })
   const pageW = doc.internal.pageSize.getWidth()
   const pageH = doc.internal.pageSize.getHeight()
-  const margin = 44
+  const margin = 36
 
   const ctx: PdfCtx = {
     doc,
@@ -38,10 +39,21 @@ export function generateResumePdf(t: TFunction) {
     pageH,
   }
 
-  const BODY = 10
-  const LH = 14
-  const GAP_MD = 8
-  const GAP_SM = 4
+  const BODY = 9
+  const LH = 12
+  const GAP_MD = 6
+  const GAP_SM = 3
+  /** Separadores de título de seção — compactos */
+  const SECTION_TITLE_FS = 9
+  /** Fim cabeçálio → 1ª régua da 1ª seção */
+  const GAP_AFTER_HEADER = 5
+  /** Entre a régua **inferior** do título e o primeiro conteúdo (equiv. ao “5–10 px” solicitado; em pt) */
+  const SECTION_PAD_LOWER_RULE_TO_CONTENT = 10
+  const SECTION_PAD_LINE_TO_TITLE = 5
+  /** Entre o texto do título e a régua inferior */
+  const SECTION_PAD_TITLE_TO_LINE = 6
+  /** Fim do **conteúdo** da seção → topo da primeira régua da seção seguinte (fixo ~5px) */
+  const SECTION_END_TO_NEXT_RULE = 5
 
   const wrap = (txt: string, maxW: number) => ctx.doc.splitTextToSize(txt, maxW)
 
@@ -74,7 +86,7 @@ export function generateResumePdf(t: TFunction) {
     }
   }
 
-  const writeTwoCol = (leftBold: string, right: string, leftFrac = 0.56) => {
+  const writeTwoCol = (leftBold: string, right: string, leftFrac = 0.56, gapAfter = GAP_SM) => {
     ctx.doc.setTextColor(0, 0, 0)
     const gapMid = 8
     const leftW = ctx.contentW * leftFrac - gapMid / 2
@@ -102,7 +114,7 @@ export function generateResumePdf(t: TFunction) {
         ctx.doc.text(R[i], ctx.margin + ctx.contentW, lineY, { align: 'right' })
       }
     }
-    ctx.y = y0 + n * LH + GAP_SM
+    ctx.y = y0 + n * LH + gapAfter
   }
 
   const writeBullets = (items: string[]) => {
@@ -128,23 +140,38 @@ export function generateResumePdf(t: TFunction) {
   }
 
   const renderSectionTitle = (title: string) => {
-    ctx.y += GAP_SM
+    ensure(
+      ctx,
+      SECTION_PAD_LINE_TO_TITLE
+        + SECTION_TITLE_FS * 1.35
+        + SECTION_PAD_TITLE_TO_LINE
+        + SECTION_PAD_LOWER_RULE_TO_CONTENT
+        + LH,
+    )
+
     drawRuleThin()
-    ctx.y += GAP_MD
-    ensure(ctx, LH + GAP_MD)
+    ctx.y += SECTION_PAD_LINE_TO_TITLE
+
     ctx.doc.setFont('helvetica', 'bold')
-    ctx.doc.setFontSize(10)
+    ctx.doc.setFontSize(SECTION_TITLE_FS)
     ctx.doc.setTextColor(42, 42, 42)
-    ctx.doc.text(title.toUpperCase(), ctx.pageW / 2, ctx.y, { align: 'center' })
-    ctx.y += LH + GAP_SM
+    const titleTop = ctx.y
+    ctx.doc.text(title.toUpperCase(), ctx.pageW / 2, titleTop, {
+      align: 'center',
+      baseline: 'top',
+    })
+    ctx.y = titleTop + Math.ceil(SECTION_TITLE_FS * 1.15)
+    ctx.y += SECTION_PAD_TITLE_TO_LINE
+
     drawRuleThin()
-    ctx.y += GAP_MD
+    ctx.y += SECTION_PAD_LOWER_RULE_TO_CONTENT
     ctx.doc.setTextColor(0, 0, 0)
   }
 
   const renderSkillBullets = (groups: { category: string; skillsJoined: string }[]) => {
     const indentBullet = ctx.margin + 12
-    for (const g of groups) {
+    const gapBetweenGroups = Math.max(2, GAP_SM)
+    groups.forEach((g, gi) => {
       ctx.doc.setFontSize(BODY)
       ctx.doc.setTextColor(0, 0, 0)
       const dash = '- '
@@ -161,7 +188,7 @@ export function generateResumePdf(t: TFunction) {
       const bodyLines = wrap(g.skillsJoined, maxW)
 
       const totalH = LH * Math.max(1, bodyLines.length)
-      ensure(ctx, totalH + LH + GAP_SM)
+      ensure(ctx, totalH + LH + gapBetweenGroups)
 
       const blockStart = ctx.y
       ctx.doc.text(dash, indentBullet, blockStart)
@@ -175,16 +202,19 @@ export function generateResumePdf(t: TFunction) {
         ctx.doc.text(bodyLines[j], bodyX, lineY)
       }
 
-      ctx.y = blockStart + Math.max(bodyLines.length, 1) * LH + GAP_SM
-    }
+      ctx.y =
+        blockStart
+        + Math.max(bodyLines.length, 1) * LH
+        + (gi < groups.length - 1 ? gapBetweenGroups : 0)
+    })
   }
 
   /* --- Header (duas colunas no topo como no exemplo) --- */
   {
     const { header } = m
-    const NAME_FS = 17
-    const CONTACT_FS = 10
-    const HEADLINE_FS = 11
+    const NAME_FS = 16
+    const CONTACT_FS = 9
+    const HEADLINE_FS = 10
     /** Alinha o topo das duas colunas sem “recuo” pelo baseline de fontes diferentes */
     const nameLinePitch = Math.ceil(NAME_FS * 1.1)
     const contactLinePitch = Math.ceil(CONTACT_FS * 1.25)
@@ -200,17 +230,21 @@ export function generateResumePdf(t: TFunction) {
     ctx.doc.setFont('helvetica', 'normal')
     const contactLines = ctx.doc.splitTextToSize(contactLinesRaw, rightW)
 
-    /** Metade do espaço que antes usávamos só com GAP_SM após o bloco nome/contato */
     const gapAfterNameBand = Math.max(2, GAP_SM / 2)
-    const gapAfterHeadline = Math.ceil(GAP_MD / 2)
+    /** Mais próximo do nome (antes metade já reduzido; usuário quer ainda menor) */
+    const gapAfterHeadline = 2
+    const headlineLineH = Math.ceil(HEADLINE_FS * 1.08)
+    ctx.doc.setFont('helvetica', 'normal')
+    ctx.doc.setFontSize(HEADLINE_FS)
+    const headlineLines = ctx.doc.splitTextToSize(header.headlineRole, ctx.contentW)
 
     ensure(
       ctx,
       Math.max(nameLines.length * nameLinePitch, contactLines.length * contactLinePitch)
         + gapAfterNameBand
-        + HEADLINE_FS
+        + headlineLines.length * headlineLineH
         + gapAfterHeadline
-        + 14,
+        + 10,
     )
     const bandTop = ctx.y
 
@@ -236,14 +270,19 @@ export function generateResumePdf(t: TFunction) {
     ctx.doc.setFont('helvetica', 'normal')
     ctx.doc.setFontSize(HEADLINE_FS)
     ctx.doc.setTextColor(42, 42, 42)
-    ctx.doc.text(header.headlineRole, ctx.margin, ctx.y, { baseline: 'top' })
-    ctx.y += Math.ceil(HEADLINE_FS * 1.08) + gapAfterHeadline
+    ensure(ctx, headlineLines.length * headlineLineH + gapAfterHeadline)
+    for (let i = 0; i < headlineLines.length; i++) {
+      ctx.doc.text(headlineLines[i], ctx.margin, ctx.y + i * headlineLineH, { baseline: 'top' })
+    }
+    ctx.y += headlineLines.length * headlineLineH + gapAfterHeadline
 
-    const linkFont = 9
+    const linkFont = 8
     const social: { label: string; url?: string }[] = [
       { label: header.linkedinLabel, url: header.linkedinUrl },
       { label: header.githubLabel, url: header.githubUrl },
-      { label: header.portfolioLabel, url: header.portfolioHref || undefined },
+      ...(portfolioEnabled
+        ? [{ label: header.portfolioLabel, url: header.portfolioHref || undefined }]
+        : []),
     ]
     ensure(ctx, LH + GAP_SM)
     ctx.doc.setFontSize(linkFont)
@@ -269,52 +308,48 @@ export function generateResumePdf(t: TFunction) {
       x += lw
     }
     ctx.doc.setTextColor(0, 0, 0)
-    ctx.y += linkH + GAP_SM
+    ctx.y += linkH + 2
 
     ctx.doc.setFontSize(BODY)
-
-    ctx.y += GAP_MD
-    ctx.doc.setDrawColor(...RULE_RGB)
-    ctx.doc.setLineWidth(0.55)
-    ctx.doc.line(ctx.margin, ctx.y, ctx.pageW - ctx.margin, ctx.y)
-    ctx.y += GAP_MD
+    ctx.y += GAP_AFTER_HEADER
   }
 
   /* --- Sections --- */
 
   const renderEducation = (entries: ResumePdfEducationEntry[]) => {
-    for (const e of entries) {
-      writeTwoCol(e.institution.toUpperCase(), e.period, 0.58)
+    entries.forEach((e, idx) => {
+      writeTwoCol(e.institution.toUpperCase(), e.period, 0.58, GAP_SM)
       writePlainLines(e.degreeLine)
       if (e.detailBullet) writeBullets([e.detailBullet])
-      ctx.y += GAP_SM
-    }
+      if (idx < entries.length - 1) ctx.y += 4
+    })
   }
 
   const renderCertRows = (rows: { left: string; right: string }[]) => {
-    for (const r of rows) {
-      if (r.right.trim()) writeTwoCol(r.left, r.right, 0.66)
+    rows.forEach((r, idx) => {
+      if (r.right.trim()) writeTwoCol(r.left, r.right, 0.66, GAP_SM)
       else writePlainLines(r.left, { bold: true })
-      ctx.y += GAP_SM
-    }
+      if (idx < rows.length - 1) ctx.y += 4
+    })
   }
 
-  for (const section of m.sections) {
+  for (let si = 0; si < m.sections.length; si++) {
+    const section = m.sections[si]
     renderSectionTitle(section.title)
     switch (section.body.kind) {
       case 'skillGroups':
         renderSkillBullets(section.body.groups)
         break
-      case 'experience':
-        for (const e of section.body.entries) {
-          writeTwoCol(e.leftTitle, e.rightMeta)
-          writeBullets(e.bullets)
-          if (e.techLine) {
-            writePlainLines(e.techLine, { size: 9, italic: true, x: ctx.margin + 12 })
-          }
-          ctx.y += GAP_MD
-        }
+      case 'experience': {
+        const list = section.body.entries
+        list.forEach((e, ei) => {
+          const detailed = e.bullets.length > 0
+          writeTwoCol(e.leftTitle, e.rightMeta, 0.58, detailed ? GAP_SM : 2)
+          if (e.bullets.length) writeBullets(e.bullets)
+          if (ei < list.length - 1) ctx.y += detailed ? GAP_MD : 2
+        })
         break
+      }
       case 'education':
         renderEducation(section.body.entries)
         break
@@ -327,7 +362,7 @@ export function generateResumePdf(t: TFunction) {
       default:
         break
     }
-    ctx.y += GAP_SM
+    ctx.y += SECTION_END_TO_NEXT_RULE
   }
 
   doc.save(m.fileName)

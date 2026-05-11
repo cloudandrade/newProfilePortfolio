@@ -1,3 +1,9 @@
+/**
+ * Se `false`, o PDF do currículo não inclui o link «Portfólio» na linha de contatos
+ * (LinkedIn e GitHub permanecem).
+ */
+export const portfolioEnabled = false
+
 /** Dados que não dependem de idioma (nomes próprios, URLs, telefone) */
 export const profile = {
   name: 'Jan Andrade',

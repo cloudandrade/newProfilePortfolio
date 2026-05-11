@@ -1,9 +1,9 @@
 import type { TFunction } from 'i18next'
 import i18n from '../../i18n'
 import { educationOrder } from '../../data/educationOrder'
-import { experienceOrder } from '../../data/experienceMeta'
+import { experienceOrder, getExperienceMeta } from '../../data/experienceMeta'
 import { resumePdfSkillGroupDefs } from '../../data/resumePdfSkillGroups'
-import { getPortfolioHref, profile } from '../../data/profile'
+import { getPortfolioHref, portfolioEnabled, profile } from '../../data/profile'
 import {
   pickLocalized,
   pickLocalizedList,
@@ -16,7 +16,6 @@ export type ResumePdfExperienceEntry = {
   leftTitle: string
   rightMeta: string
   bullets: string[]
-  techLine?: string
 }
 
 export type ResumePdfEducationEntry = {
@@ -72,8 +71,8 @@ function dedupeStrings(list: string[], key: (s: string) => string = (s) => s.toL
   })
 }
 
-function toResumeTitleCase(role: string, company: string): string {
-  return `${role.toUpperCase()} — ${company}`
+function toResumeExperienceTitle(role: string, company: string): string {
+  return `${role.toUpperCase()} — ${company.toUpperCase()}`
 }
 
 function buildSkillGroups(t: TFunction): { category: string; skillsJoined: string }[] {
@@ -115,7 +114,6 @@ function buildSkillGroups(t: TFunction): { category: string; skillsJoined: strin
 
 function buildExperienceEntries(t: TFunction, locale: ReturnType<typeof resumeOverlayLocale>): ResumePdfExperienceEntry[] {
   const entries: ResumePdfExperienceEntry[] = []
-  const techLabel = t('resume.technologiesLabel')
 
   for (const id of experienceOrder) {
     const role = t(`experience.items.${id}.role`)
@@ -126,17 +124,19 @@ function buildExperienceEntries(t: TFunction, locale: ReturnType<typeof resumeOv
     const workMode = pickLocalized(overlay?.workMode, locale)
     const rightMeta = workMode ? `${period}\n${workMode}` : period
 
-    const bullets = dedupeStrings([
-      ...(Array.isArray(highlights) ? highlights : []),
-      ...pickLocalizedList(overlay?.extraHighlights, locale),
-    ])
+    const includeNarrative = getExperienceMeta(id)?.pdfIncludeNarrative === true
+
+    const bullets = includeNarrative
+      ? dedupeStrings([
+          ...(Array.isArray(highlights) ? highlights : []),
+          ...pickLocalizedList(overlay?.extraHighlights, locale),
+        ]).slice(0, 2)
+      : []
 
     entries.push({
-      leftTitle: toResumeTitleCase(role, company),
+      leftTitle: toResumeExperienceTitle(role, company),
       rightMeta,
       bullets,
-      techLine:
-        overlay?.technologies?.length ? `${techLabel}: ${overlay.technologies.join(', ')}` : undefined,
     })
   }
 
@@ -190,11 +190,12 @@ function buildCertificationRows(t: TFunction, locale: ReturnType<typeof resumeOv
 export function buildResumeTemplate(t: TFunction): ResumePdfDocument {
   const locale = resumeOverlayLocale(i18n.language)
 
+  const coreSkillsSection: ResumePdfSection = {
+    title: t('resume.sectionCoreSkills'),
+    body: { kind: 'skillGroups', groups: buildSkillGroups(t) },
+  }
+
   const sections: ResumePdfSection[] = [
-    {
-      title: t('resume.sectionCoreSkills'),
-      body: { kind: 'skillGroups', groups: buildSkillGroups(t) },
-    },
     {
       title: t('resume.sectionExperience'),
       body: { kind: 'experience', entries: buildExperienceEntries(t, locale) },
@@ -230,6 +231,7 @@ export function buildResumeTemplate(t: TFunction): ResumePdfDocument {
         })(),
       },
     },
+    coreSkillsSection,
   )
 
   return {
@@ -244,7 +246,7 @@ export function buildResumeTemplate(t: TFunction): ResumePdfDocument {
       githubLabel: t('resume.contactGithub'),
       githubUrl: profile.githubUrl,
       portfolioLabel: t('contact.portfolio'),
-      portfolioHref: getPortfolioHref(),
+      portfolioHref: portfolioEnabled ? getPortfolioHref() : '',
     },
     sections,
   }

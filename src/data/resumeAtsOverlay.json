@@ -1,172 +1,28 @@
 {
   "experience": {
     "bankme": {
-      "workMode": {
-        "en": "Remote",
-        "pt": "Remoto",
-        "es": "Remoto"
-      },
-      "extraHighlights": {
-        "en": [
-          "Contributed to credit and financial products in a regulated fintech context; partnered with product and engineering on delivery and quality.",
-          "Strengthened backend and frontend flows for lending and operations; participated in reviews, refinements, and production support."
-        ],
-        "pt": [
-          "Atuação em produtos de crédito e operações financeiras em contexto fintech; alinhamento com produto e engenharia para entrega e qualidade.",
-          "Fortalecimento de fluxos frontend e backend para operações; participação em revisões, refinamentos e suporte à produção."
-        ],
-        "es": [
-          "Contribución a productos de crédito y operaciones en contexto fintech; alineación con producto e ingeniería para entrega y calidad.",
-          "Fortalecimiento de flujos frontend y backend; participación en revisiones, refinamientos y soporte a producción."
-        ]
-      },
-      "technologies": [
-        "TypeScript",
-        "React",
-        "Node.js",
-        "Nest.js",
-        "REST APIs",
-        "PostgreSQL",
-        "Docker",
-        "CI/CD",
-        "Agile",
-        "Scrum"
-      ]
+      "workMode": { "en": "Remote", "pt": "Remoto", "es": "Remoto" }
     },
     "illa-livelo": {
-      "workMode": { "en": "Remote", "pt": "Remoto", "es": "Remoto" },
-      "extraHighlights": {
-        "en": [
-          "Worked on loyalty and partner-facing journeys for Livelo; aligned UI and APIs with business rules and legacy integrations.",
-          "Improved stability and maintainability of React and Angular modules; collaborated with squads on releases and bug triage."
-        ],
-        "pt": [
-          "Atuação em jornadas de fidelidade e parceiros para Livelo; alinhamento de UI e APIs a regras de negócio e integrações legadas.",
-          "Estabilização e manutenção de módulos React e Angular; colaboração com squads em releases e triagem de bugs."
-        ],
-        "es": [
-          "Trabajo en journeys de fidelización y partners para Livelo; alineación de UI y APIs con reglas de negocio e integraciones legacy.",
-          "Estabilidad y mantenimiento de módulos React y Angular; colaboración con squads en releases y triage."
-        ]
-      },
-      "technologies": [
-        "TypeScript",
-        "JavaScript",
-        "React",
-        "Angular",
-        "REST APIs",
-        "Agile"
-      ]
+      "workMode": { "en": "Remote", "pt": "Remoto", "es": "Remoto" }
     },
     "squadra-shell": {
-      "workMode": { "en": "Hybrid / Remote", "pt": "Híbrido / Remoto", "es": "Híbrido / Remoto" },
-      "extraHighlights": {
-        "en": [
-          "Built and maintained Shellbox retail and fuel journey features; integrated services across web and serverless backends.",
-          "Delivered Angular and React experiences alongside Node.js, Java, and Python services; used AWS Lambda and serverless patterns in production."
-        ],
-        "pt": [
-          "Desenvolvimento e manutenção de fluxos Shellbox no varejo e abastecimento; integração de serviços entre web e backends serverless.",
-          "Entregas em Angular e React com Node.js, Java e Python; AWS Lambda e padrões serverless em produção."
-        ],
-        "es": [
-          "Construcción y mantenimiento de flujos Shellbox; integración de servicios entre web y backends serverless.",
-          "Entregas en Angular y React con Node.js, Java y Python; AWS Lambda y patrones serverless en producción."
-        ]
-      },
-      "technologies": [
-        "Angular",
-        "React",
-        "Node.js",
-        "Java",
-        "Python",
-        "AWS Lambda",
-        "Serverless",
-        "REST APIs"
-      ]
+      "workMode": { "en": "Remote", "pt": "Remoto", "es": "Remoto" }
     },
     "add": {
-      "workMode": { "en": "On-site / Hybrid", "pt": "Presencial / Híbrido", "es": "Presencial / Híbrido" },
-      "extraHighlights": {
-        "en": [
-          "Corporate systems and customer-facing modules; feature delivery with Angular frontends and Node.js integrations.",
-          "Participated in debugging and hardening of AWS Lambda workflows and serverless endpoints."
-        ],
-        "pt": [
-          "Sistemas corporativos e módulos voltados a usuários; entregas com Angular no front e integrações Node.js.",
-          "Participação em correções e fortalecimento de fluxos AWS Lambda e endpoints serverless."
-        ],
-        "es": [
-          "Sistemas corporativos y módulos hacia usuarios; entregas con Angular e integraciones Node.js.",
-          "Depuración y endurecimiento de flujos AWS Lambda y endpoints serverless."
-        ]
-      },
-      "technologies": [
-        "Angular",
-        "Node.js",
-        "TypeScript",
-        "AWS Lambda",
-        "Serverless",
-        "REST APIs"
-      ]
+      "workMode": { "en": "Remote", "pt": "Remoto", "es": "Remoto" }
     },
     "stefanini": {
-      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" },
-      "extraHighlights": {
-        "en": [
-          "Maintained and enhanced enterprise applications for automotive sector clients; collaborated under SLAs with distributed teams."
-        ],
-        "pt": [
-          "Manutenção e evolução de aplicações corporativas para cliente do setor automotivo; trabalho com SLA e times distribuídos."
-        ],
-        "es": [
-          "Mantenimiento y evolución de aplicaciones corporativas en sector automotriz; trabajo con SLA y equipos distribuidos."
-        ]
-      },
-      "technologies": ["Java", "SQL", "Git", "Enterprise integrations"]
+      "workMode": { "en": "Hybrid", "pt": "Híbrido", "es": "Híbrido" }
     },
     "capgemini": {
-      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" },
-      "extraHighlights": {
-        "en": [
-          "Delivery and support for large corporate systems; experience with structured releases and cross-team coordination."
-        ],
-        "pt": [
-          "Entrega e suporte para sistemas corporativos de grande porte; releases estruturadas e coordenação entre times."
-        ],
-        "es": [
-          "Entrega y soporte para sistemas corporativos grandes; releases estructuradas y coordinación entre equipos."
-        ]
-      },
-      "technologies": ["Java", "SQL", "Git", "Agile"]
+      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" }
     },
     "cronsolucoes": {
-      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" },
-      "extraHighlights": {
-        "en": [
-          "Full-stack and integration work on long-lived internal systems; progressed from maintenance to feature ownership."
-        ],
-        "pt": [
-          "Atuação full stack e integrações em sistemas internos; evolução de manutenção para ownership de funcionalidades."
-        ],
-        "es": [
-          "Trabajo full stack e integraciones en sistemas internos; evolución de mantenimiento a ownership de funcionalidades."
-        ]
-      },
-      "technologies": ["Java", "SQL", "JavaScript", "Git"]
+      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" }
     },
     "abefs": {
-      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" },
-      "extraHighlights": {
-        "en": ["First professional role; learned delivery discipline and foundational web and backend practices."],
-        "pt": [
-          "Primeira experiência profissional; bases de entrega disciplinada e práticas introdutórias de web e backend."
-        ],
-        "es": [
-          "Primera experiencia profesional; bases de entrega disciplinada y prácticas introductorias web y backend."
-        ]
-      },
-      "technologies": ["Java", "SQL", "Git"]
+      "workMode": { "en": "On-site", "pt": "Presencial", "es": "Presencial" }
     }
   },
   "standaloneProjects": [

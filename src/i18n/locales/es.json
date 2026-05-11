@@ -85,12 +85,11 @@
     "clientsCarouselNote": "Mencionar clientes es contexto factual de carrera. Los contratos y NDAs pueden limitar lo que puedes divulgar — revisa tus acuerdos si tienes dudas.",
     "items": {
       "bankme": {
-        "role": "Ingeniero Fullstack Senior",
+        "role": "Ingeniero Fullstack Senior / Tech Lead",
         "company": "Bankme",
         "period": "jul. 2025 — actualidad",
         "highlights": [
-          "Desarrollo full stack en productos y plataformas financieras de Bankme.",
-          "Enfoque en calidad, entrega y stack web moderna en contexto fintech."
+          "Referencia técnica del equipo de operaciones de crédito de la fintech, liderando entregas estratégicas, resolución de incidentes críticos y evolución de flujos esenciales para la operación. Principal punto focal técnico del squad y posteriormente Tech Lead, apoyando decisiones técnicas, refinamientos y dirección de las entregas del equipo."
         ]
       },
       "illa-livelo": {
@@ -98,17 +97,15 @@
         "company": "Illa / Livelo",
         "period": "jul. 2024 — jun. 2025",
         "highlights": [
-          "Desarrollo y evolución de funcionalidades y corrección de bugs en aplicaciones corporativas.",
-          "Front-end con React y Angular."
+          "Participación en el equipo responsable de campañas estratégicas de Livelo, con mejoras para Aniversario Livelo, Black Friday y Clube Livelo, funcionalidades que permanecieron activas e integradas al ecosistema de la plataforma. Contribución activa en la evolución de experiencias promocionales y de suscripción, apoyando engagement, recurrencia y resultados comerciales."
         ]
       },
       "squadra-shell": {
         "role": "Ingeniero de Software Senior",
-        "company": "Squadra / Shell",
+        "company": "Squadra / Shellbox",
         "period": "may. 2022 — jul. 2024",
         "highlights": [
-          "Desarrollo y mantenimiento de sistemas en el contexto Shellbox.",
-          "Stack: Angular, React, Node.js, Java, Python, AWS Lambda y serverless."
+          "Integrante de los primeros equipos que evolucionaron Shell Box, en funcionalidades estratégicas de fidelización, pagos digitales e integraciones de la plataforma. Impulsor del abastecimiento vía RFID y de la integración Shell Box + Sem Parar para pago automático, mejorando experiencias de abastecimiento rápido y fidelización."
         ]
       },
       "add": {
@@ -116,33 +113,40 @@
         "company": ".Add",
         "period": "abr. 2021 — abr. 2022",
         "highlights": [
-          "Funcionalidades y correcciones en aplicaciones corporativas.",
-          "Angular, Node.js, AWS Lambda y serverless."
+          "Corporativo: Angular en front y Node.js con AWS Lambda/serverless. Features, correcciones y endurecimiento de flujos y endpoints."
         ]
       },
       "stefanini": {
         "role": "Desarrollador Semi-senior",
         "company": "Stefanini",
         "period": "jul. 2020 — abr. 2021",
-        "highlights": ["Desarrollo y mantenimiento de sistemas corporativos."]
+        "highlights": [
+          "Cliente automotriz: mantenimiento y evolución bajo SLA. Soporte y entrega incremental combinando trabajo presencial y remoto."
+        ]
       },
       "capgemini": {
         "role": "Desarrollador Semi-senior",
         "company": "Capgemini",
         "period": "jun. 2019 — jul. 2020",
-        "highlights": ["Desarrollo y mantenimiento de sistemas corporativos."]
+        "highlights": [
+          "Grandes sistemas corporativos; releases estructurados y entrega estable. Soporte y fixes alineados a equipos multidisciplinares."
+        ]
       },
       "cronsolucoes": {
         "role": "Desarrollador Semi-senior",
         "company": "CronSoluções",
         "period": "jun. 2017 — jul. 2019",
-        "highlights": ["Desarrollo y mantenimiento de sistemas corporativos."]
+        "highlights": [
+          "Sistemas internos Java/SQL/JavaScript de ciclo prolongado. De soporte fuerte a ownership de features e integraciones."
+        ]
       },
       "abefs": {
         "role": "Desarrollador Junior",
         "company": "ABEFS",
         "period": "jun. 2016 — jun. 2017",
-        "highlights": ["Inicio de mi trayectoria profesional en desarrollo de software."]
+        "highlights": [
+          "Primeras entregas Java/SQL en equipo de proyecto. Fundamentos de código limpio, previsibilidad y trabajo colaborativo."
+        ]
       }
     }
   },
@@ -232,7 +236,13 @@
       "nosql": "NoSQL",
       "git": "Git",
       "tests": "Pruebas unitarias",
-      "python": "Python"
+      "python": "Python",
+      "terraform": "Terraform",
+      "gcp": "GCP",
+      "aws": "AWS",
+      "jenkins": "Jenkins",
+      "vercel": "Vercel",
+      "github-actions": "GitHub Actions"
     }
   },
   "projects": {
@@ -261,11 +271,10 @@
     "sectionCertifications": "CERTIFICACIONES",
     "sectionLanguages": "IDIOMAS",
     "sectionAdditional": "INFORMACIÓN ADICIONAL",
-    "technologiesLabel": "Tecnologías",
     "keywordHeadline": "Ingeniero Fullstack | TypeScript | JavaScript | React | Node.js | Angular | AWS | GCP | Serverless | Desarrollo asistido por IA",
     "contactLinkedIn": "LinkedIn",
     "contactGithub": "GitHub",
-    "headlineRole": "Software Engineer / Tech Lead",
+    "headlineRole": "Software Engineer / Tech Lead / JavaScript & TypeScript Specialist",
     "educationAluraPdfSummary": "Tramo intensivo en ingeniería de software (microservicios, CI/CD, liderazgo ágil, QA y Tech Lead — múltiples certificados).",
     "atsProfessionalSummary": [
       "Ingeniero de software con experiencia en plataformas web, sistemas corporativos y productos fintech, usando TypeScript, JavaScript, React, Angular, Node.js, Java, Python y stacks serverless en AWS y entornos híbridos.",
@@ -273,8 +282,9 @@
       "Experiencia en equipos ágiles (Scrum), colaboración multifuncional, documentación y soporte a producción con stakeholders distribuidos."
     ],
     "coreSkillsExtra": [
-      "REST APIs",
+      "GenAI y RAG",
       "Microservicios",
+      "REST APIs",
       "Agile / Scrum",
       "Code review",
       "CI/CD",

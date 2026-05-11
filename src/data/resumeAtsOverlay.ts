@@ -7,7 +7,6 @@ export type LocalizedStrings = Partial<Record<ResumeOverlayLocale, string>>
 export type ExperienceAtsOverlay = {
   workMode?: LocalizedStrings
   extraHighlights?: Partial<Record<ResumeOverlayLocale, string[]>>
-  technologies?: string[]
 }
 
 export type StandaloneProjectOverlay = {
