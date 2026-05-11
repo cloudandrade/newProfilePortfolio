@@ -14,9 +14,10 @@ import {
   useTheme,
 } from '@mui/material'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/profile'
+import { useHeroRotatingTypewriter } from '../../hooks/useHeroRotatingTypewriter'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { HeroMediaBlock } from './HeroMediaBlock'
 import './Hero.css'
@@ -53,7 +54,7 @@ function mapNameLetters(str: string, keyPrefix: string) {
 }
 
 export function Hero() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const theme = useTheme()
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
@@ -92,35 +93,10 @@ export function Hero() {
   const [heroFirstName, ...heroRestName] = profile.name.split(' ')
   const heroFamilyName = heroRestName.join(' ')
 
-  const ROLES = useMemo(() => {
-    const raw = t('hero.rotatingSubtitles', { returnObjects: true })
-    return Array.isArray(raw) ? [...(raw as string[])] : []
-  }, [t, i18n.language])
-
-  const useTyping = () => {
-    const [text, setText] = useState("");
-    const [i, setI] = useState(0);
-    const [del, setDel] = useState(false);
-  
-    useEffect(() => {
-      const word = ROLES[i % ROLES.length];
-      const speed = del ? 40 : 80;
-      const t = setTimeout(() => {
-        const next = del ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1);
-        setText(next);
-        if (!del && next === word) setTimeout(() => setDel(true), 1400);
-        else if (del && next === "") {
-          setDel(false);
-          setI((v) => v + 1);
-        }
-      }, speed);
-      return () => clearTimeout(t);
-    }, [text, del, i]);
-  
-    return text;
-  };
-
-  const rotatingRoles = useTyping()
+  const { displayText: rotatingRoles } = useHeroRotatingTypewriter(
+    t('hero.rotatingSubtitles', { returnObjects: true }),
+    { reducedMotion: reduced },
+  )
 
   const lightGreen = theme.palette.primary.light
 
@@ -276,8 +252,13 @@ export function Hero() {
               component="h2"
               className="hero-title"
               sx={{
+                width: '100%',
+                maxWidth: '100%',
                 color: isDark ? lightGreen : theme.palette.primary.main,
                 fontWeight: 600,
+                whiteSpace: 'normal',
+                overflowWrap: 'anywhere',
+                wordBreak: 'break-word',
                 '& span, &::after': { color: 'inherit' },
               }}
             >

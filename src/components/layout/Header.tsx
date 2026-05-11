@@ -9,17 +9,20 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Drawer,
   FormControl,
   IconButton,
   List,
+  ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   MenuItem,
+  Typography,
   Select,
   Tooltip,
   Toolbar,
-  useMediaQuery,
   useTheme,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -43,7 +46,6 @@ function normalizeLang(code: string): 'en' | 'es' | 'pt' {
 
 export function Header() {
   const theme = useTheme()
-  const isMd = useMediaQuery(theme.breakpoints.up('md'))
   const { t, i18n } = useTranslation()
   const { mode, toggleMode } = useThemeMode()
   const { active, update, setActiveFromHash } = useActiveNavSection()
@@ -69,6 +71,7 @@ export function Header() {
 
   const handleDownloadResume = () => {
     generateResumePdf(t)
+    setDrawerOpen(false)
   }
 
   const appBarBg = elevated
@@ -103,12 +106,13 @@ export function Header() {
   const [givenName, ...familyNameParts] = profile.name.split(' ')
   const familyName = familyNameParts.join(' ')
 
-  const languageSelect = (
-    <FormControl size="medium" sx={{ minWidth: { xs: 94, sm: 118 } }}>
+  const languageSelectDesktop = (
+    <FormControl size="medium" sx={{ minWidth: 118 }}>
       <Select
         value={currentLang}
         onChange={(e) => void i18n.changeLanguage(e.target.value)}
         aria-label={t('language.label')}
+        renderValue={(v) => t(`language.${v as 'en' | 'es' | 'pt'}`)}
         sx={{
           fontSize: '1rem',
           color: 'text.primary',
@@ -122,7 +126,30 @@ export function Header() {
     </FormControl>
   )
 
-  const downloadButton = (
+  const languageSelectDrawer = (
+    <FormControl fullWidth size="small" sx={{ mt: 0.5 }}>
+      <Select
+        value={currentLang}
+        onChange={(e) => {
+          void i18n.changeLanguage(e.target.value)
+          setDrawerOpen(false)
+        }}
+        aria-label={t('language.label')}
+        renderValue={(v) => t(`language.${v as 'en' | 'es' | 'pt'}`)}
+        sx={{
+          fontSize: '0.9375rem',
+          color: 'text.primary',
+          '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
+        }}
+      >
+        <MenuItem value="en">{t('language.en')}</MenuItem>
+        <MenuItem value="es">{t('language.es')}</MenuItem>
+        <MenuItem value="pt">{t('language.pt')}</MenuItem>
+      </Select>
+    </FormControl>
+  )
+
+  const downloadButtonWide = (
     <Tooltip title={t('resume.downloadHint')} arrow>
       <Button
         color="primary"
@@ -130,7 +157,7 @@ export function Header() {
         size="medium"
         onClick={handleDownloadResume}
         startIcon={<DownloadOutlinedIcon />}
-        sx={{ textTransform: 'none', fontSize: '1rem', py: 0.75 }}
+        sx={{ textTransform: 'none', fontSize: '1rem', py: 0.75, flexShrink: 0 }}
         aria-label={t('resume.downloadHint')}
       >
         {t('resume.downloadCta')}
@@ -149,10 +176,10 @@ export function Header() {
     </IconButton>
   )
 
-  const toolbarActions = (
+  const toolbarActionsDesktop = (
     <Box className="header-controls">
-      {downloadButton}
-      {languageSelect}
+      {downloadButtonWide}
+      {languageSelectDesktop}
       {themeToggle}
     </Box>
   )
@@ -187,30 +214,36 @@ export function Header() {
           transition: 'background-color 0.25s ease, border-color 0.25s ease',
         }}
       >
-        <Container>
+        <Container maxWidth="lg" sx={{ px: { xs: 1.5, sm: 2 } }}>
           <Toolbar
             disableGutters
             className="header-toolbar"
             sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: 'minmax(0,1fr) auto', md: '1fr auto 1fr' },
+              display: 'flex',
+              flexDirection: 'row',
               alignItems: 'center',
-              columnGap: { xs: 1, md: 2 },
+              justifyContent: 'space-between',
+              gap: 1,
+              minWidth: 0,
             }}
           >
-            <Box sx={{ justifySelf: 'start', minWidth: 0 }}>
+            <Box sx={{ minWidth: 0, flex: '1 1 auto', overflow: 'hidden' }}>
               <Button
                 color="inherit"
                 onClick={() => handleNav('#home')}
                 sx={{
                   fontWeight: 600,
-                  fontSize: { xs: '1.02rem', md: '1.2rem' },
+                  fontSize: { xs: '0.95rem', sm: '1.02rem', md: '1.2rem' },
                   letterSpacing: '-0.02em',
                   color: 'text.primary',
                   textTransform: 'none',
                   maxWidth: '100%',
+                  minWidth: 0,
+                  display: 'block',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  textAlign: 'left',
                 }}
               >
                 {givenName}
@@ -228,32 +261,34 @@ export function Header() {
             <Box
               sx={{
                 display: { xs: 'none', md: 'flex' },
+                flex: '1 1 auto',
                 justifyContent: 'center',
-                justifySelf: 'center',
+                minWidth: 0,
+                px: 1,
               }}
             >
               {navLinks}
             </Box>
             <Box
               sx={{
-                justifySelf: 'end',
-                display: 'flex',
+                display: { xs: 'none', md: 'flex' },
                 alignItems: 'center',
-                gap: { xs: 0.25, sm: 0.5 },
+                gap: 1,
+                flexShrink: 0,
               }}
             >
-              {toolbarActions}
-              {!isMd ? (
-                <IconButton
-                  color="inherit"
-                  edge="end"
-                  size="large"
-                  aria-label={t('a11y.openMenu')}
-                  onClick={() => setDrawerOpen(true)}
-                >
-                  <MenuIcon />
-                </IconButton>
-              ) : null}
+              {toolbarActionsDesktop}
+            </Box>
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, flexShrink: 0 }}>
+              <IconButton
+                color="inherit"
+                edge="end"
+                size="large"
+                aria-label={t('a11y.openMenu')}
+                onClick={() => setDrawerOpen(true)}
+              >
+                <MenuIcon />
+              </IconButton>
             </Box>
           </Toolbar>
         </Container>
@@ -279,10 +314,35 @@ export function Header() {
               <CloseIcon />
             </IconButton>
           </Box>
-          <List component="nav" aria-label={t('a11y.mobileNav')}>
+          <List component="nav" aria-label={t('a11y.mobileNav')} sx={{ pt: 0 }}>
             <ListItemButton onClick={handleDownloadResume}>
+              <ListItemIcon sx={{ minWidth: 40, color: 'primary.main' }}>
+                <DownloadOutlinedIcon />
+              </ListItemIcon>
               <ListItemText primary={t('resume.downloadCta')} secondary={t('resume.downloadHint')} />
             </ListItemButton>
+
+            <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', py: 2, px: 2 }}>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                {t('language.label')}
+              </Typography>
+              {languageSelectDrawer}
+            </ListItem>
+
+            <ListItemButton
+              onClick={() => {
+                toggleMode()
+                setDrawerOpen(false)
+              }}
+            >
+              <ListItemIcon sx={{ minWidth: 40 }}>
+                {mode === 'dark' ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+              </ListItemIcon>
+              <ListItemText primary={mode === 'dark' ? t('theme.useLight') : t('theme.useDark')} />
+            </ListItemButton>
+
+            <Divider sx={{ my: 1 }} />
+
             {NAV_SECTION_IDS.map((key) => (
               <ListItemButton
                 key={key}

@@ -43,7 +43,7 @@ export function HeroMediaBlock({
 
   const terminalBody = (
     <div className="box-border flex h-full min-h-0 flex-col overflow-hidden rounded-[1.6rem] border border-white/[0.06] bg-[#1b1f27] p-2.5 sm:p-3 font-mono text-[0.8125rem] leading-relaxed text-[#b7ffd8] sm:text-[0.9375rem] sm:leading-[1.65]">
-      <pre className="m-0 min-h-0 flex-1 whitespace-pre-wrap break-words">
+      <pre className="m-0 min-h-0 max-h-full flex-1 overflow-y-auto overscroll-y-contain whitespace-pre-wrap break-words pr-0.5">
         <code>{codeSnippet.slice(0, typedChars)}</code>
         {showCodeSide ? (
           <span aria-hidden className={`ml-px inline align-baseline ${caretClass}`}>
@@ -68,7 +68,7 @@ export function HeroMediaBlock({
   )
 
   const flipSizing =
-    'relative aspect-square w-[280px] sm:w-[360px] md:w-[420px] max-w-[min(100vw-2rem,420px)]'
+    'relative aspect-square w-[min(280px,calc(100vw-2.5rem))] sm:w-[360px] md:w-[420px] max-w-[min(100vw-2rem,420px)]'
 
   const flipInterior = reducedMotion ? (
     <div
