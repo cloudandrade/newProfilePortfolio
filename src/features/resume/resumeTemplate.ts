@@ -9,7 +9,13 @@ import {
   pickLocalizedList,
   resumeAtsOverlay,
   resumeOverlayLocale,
+  type ResumeOverlayLocale,
 } from '../../data/resumeAtsOverlay'
+import {
+  formatSkillLabelWithYears,
+  getExtraSkillsForCategory,
+  type ResumeSkillSummaryCategory,
+} from '../../data/resumeSkillSummary'
 import { skills } from '../../data/skills'
 
 export type ResumePdfExperienceEntry = {
@@ -75,33 +81,59 @@ function toResumeExperienceTitle(role: string, company: string): string {
   return `${role.toUpperCase()} — ${company.toUpperCase()}`
 }
 
-function buildSkillGroups(t: TFunction): { category: string; skillsJoined: string }[] {
+const PDF_CATEGORY_BY_I18N_KEY: Record<string, ResumeSkillSummaryCategory> = {
+  'resume.pdfSkillCategories.languages': 'languages',
+  'resume.pdfSkillCategories.frameworks': 'frameworks',
+  'resume.pdfSkillCategories.cloud': 'cloud',
+  'resume.pdfSkillCategories.engineering': 'engineering',
+}
+
+function normalizeSkillLabelKey(label: string): string {
+  return label.trim().toLowerCase()
+}
+
+function buildSkillGroups(
+  t: TFunction,
+  locale: ResumeOverlayLocale,
+): { category: string; skillsJoined: string }[] {
   const assigned = new Set<string>()
-  const groups: { category: string; items: string[] }[] = []
+  const groups: { category: string; items: string[]; categoryId?: ResumeSkillSummaryCategory }[] = []
 
   for (const def of resumePdfSkillGroupDefs) {
     const items: string[] = []
+    const categoryId = PDF_CATEGORY_BY_I18N_KEY[def.categoryKey]
+
     for (const id of def.skillIds) {
       if (assigned.has(id)) continue
       assigned.add(id)
       const label = t(`skills.labels.${id}`)
-      if (label) items.push(label)
+      if (label) {
+        items.push(formatSkillLabelWithYears(label, locale, { skillId: id }))
+      }
     }
-    groups.push({ category: t(def.categoryKey), items })
+
+    if (categoryId) {
+      const existing = new Set(items.map(normalizeSkillLabelKey))
+      items.push(...getExtraSkillsForCategory(categoryId, locale, existing))
+    }
+
+    groups.push({ category: t(def.categoryKey), items, categoryId })
   }
 
   const extra = t('resume.coreSkillsExtra', { returnObjects: true })
   const extraList = Array.isArray(extra) ? dedupeStrings(extra as string[]) : []
   const remainingSkillIds = skills.map((s) => s.id).filter((id) => !assigned.has(id))
-  const fallbackLabels = remainingSkillIds.map((id) => t(`skills.labels.${id}`)).filter(Boolean)
+  const fallbackLabels = remainingSkillIds
+    .map((id) => {
+      const label = t(`skills.labels.${id}`)
+      return label ? formatSkillLabelWithYears(label, locale, { skillId: id }) : ''
+    })
+    .filter(Boolean)
 
   if (groups.length) {
     const last = groups[groups.length - 1]
-    last.items = dedupeStrings([
-      ...last.items,
-      ...extraList,
-      ...fallbackLabels,
-    ])
+    const formattedExtra = extraList.map((label) => formatSkillLabelWithYears(label, locale))
+    last.items = dedupeStrings([...last.items, ...formattedExtra, ...fallbackLabels])
   }
 
   return groups
@@ -192,7 +224,7 @@ export function buildResumeTemplate(t: TFunction): ResumePdfDocument {
 
   const coreSkillsSection: ResumePdfSection = {
     title: t('resume.sectionCoreSkills'),
-    body: { kind: 'skillGroups', groups: buildSkillGroups(t) },
+    body: { kind: 'skillGroups', groups: buildSkillGroups(t, locale) },
   }
 
   const sections: ResumePdfSection[] = [

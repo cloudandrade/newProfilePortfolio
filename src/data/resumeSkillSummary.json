@@ -1,0 +1,213 @@
+{
+  "bySkillId": {
+    "ts": { "years": 8, "proficiency": "senior" },
+    "js": { "years": 9, "proficiency": "senior" },
+    "node": { "years": 9, "proficiency": "senior" },
+    "java": { "years": 9, "proficiency": "senior" },
+    "python": { "years": 9, "proficiency": "senior" },
+    "sql": { "years": 9, "proficiency": "senior" },
+    "nosql": { "years": 8, "proficiency": "senior" },
+    "html-css": { "years": 9, "proficiency": "senior" },
+    "react": { "years": 8, "proficiency": "senior" },
+    "angular": { "years": 7, "proficiency": "senior" },
+    "nextjs": { "years": 5, "proficiency": "senior" },
+    "nestjs": { "years": 5, "proficiency": "senior" },
+    "spring-boot": { "years": 6, "proficiency": "senior" },
+    "react-native-expo": { "years": 4, "proficiency": "mid" },
+    "terraform": { "years": 4, "proficiency": "senior" },
+    "gcp": { "years": 3, "proficiency": "mid" },
+    "aws": { "years": 8, "proficiency": "senior" },
+    "docker": { "years": 5, "proficiency": "senior" },
+    "jenkins": { "years": 5, "proficiency": "senior" },
+    "vercel": { "years": 4, "proficiency": "senior" },
+    "github-actions": { "years": 5, "proficiency": "senior" },
+    "cloud": { "years": 8, "proficiency": "senior" },
+    "iac": { "years": 5, "proficiency": "senior" },
+    "pipelines": { "years": 7, "proficiency": "senior" },
+    "serverless": { "years": 6, "proficiency": "senior" },
+    "git": { "years": 9, "proficiency": "senior" },
+    "database-modeling": { "years": 8, "proficiency": "senior" },
+    "unit-testing": { "years": 8, "proficiency": "senior" },
+    "e2e-testing": { "years": 6, "proficiency": "senior" },
+    "refine-tasks-requirements": { "years": 7, "proficiency": "senior" },
+    "leveraging-ai-tools": { "years": 3, "proficiency": "mid" },
+    "uml-modeling": { "years": 7, "proficiency": "senior" },
+    "prototype-figma": { "years": 5, "proficiency": "senior" },
+    "automations": { "years": 6, "proficiency": "senior" },
+    "puppeteer": { "years": 4, "proficiency": "mid" }
+  },
+  "skills": [
+    {
+      "id": "graphql",
+      "years": 2,
+      "proficiency": "mid",
+      "category": "frameworks",
+      "labels": { "en": "GraphQL", "pt": "GraphQL", "es": "GraphQL" }
+    },
+    {
+      "id": "rest-api-development",
+      "years": 9,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "REST API Development",
+        "pt": "Desenvolvimento de APIs REST",
+        "es": "Desarrollo de APIs REST"
+      },
+      "matchLabels": ["REST APIs"]
+    },
+    {
+      "id": "api-design-optimization",
+      "years": 9,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "API Design & Optimization",
+        "pt": "Design e otimização de APIs",
+        "es": "Diseño y optimización de APIs"
+      }
+    },
+    {
+      "id": "backend-development",
+      "years": 9,
+      "proficiency": "senior",
+      "category": "frameworks",
+      "labels": {
+        "en": "Backend Development (Java / Python / Node)",
+        "pt": "Backend (Java / Python / Node)",
+        "es": "Backend (Java / Python / Node)"
+      }
+    },
+    {
+      "id": "database-design",
+      "years": 8,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "Database Design (SQL & NoSQL)",
+        "pt": "Modelagem de banco (SQL e NoSQL)",
+        "es": "Diseño de bases de datos (SQL y NoSQL)"
+      }
+    },
+    {
+      "id": "oci",
+      "years": 2,
+      "proficiency": "mid",
+      "category": "cloud",
+      "labels": {
+        "en": "OCI (Oracle Cloud)",
+        "pt": "OCI (Oracle Cloud)",
+        "es": "OCI (Oracle Cloud)"
+      }
+    },
+    {
+      "id": "kubernetes",
+      "years": 3,
+      "proficiency": "mid",
+      "category": "cloud",
+      "labels": { "en": "Kubernetes", "pt": "Kubernetes", "es": "Kubernetes" }
+    },
+    {
+      "id": "microservices-architecture",
+      "years": 5,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "Microservices Architecture",
+        "pt": "Arquitetura de microsserviços",
+        "es": "Arquitectura de microservicios"
+      },
+      "matchLabels": ["Microsserviços", "Microservices", "Microservicios"]
+    },
+    {
+      "id": "api-security-governance",
+      "years": 3,
+      "proficiency": "mid",
+      "category": "engineering",
+      "labels": {
+        "en": "API Security & Governance",
+        "pt": "Segurança e governança de APIs",
+        "es": "Seguridad y gobernanza de APIs"
+      }
+    },
+    {
+      "id": "api-versioning-schema",
+      "years": 7,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "API Versioning & Schema Management",
+        "pt": "Versionamento de APIs e gestão de schemas",
+        "es": "Versionado de APIs y gestión de esquemas"
+      }
+    },
+    {
+      "id": "genai-rag",
+      "years": 3,
+      "proficiency": "mid",
+      "category": "engineering",
+      "labels": { "en": "GenAI & RAG", "pt": "GenAI e RAG", "es": "GenAI y RAG" },
+      "matchLabels": ["GenAI & RAG", "GenAI e RAG", "GenAI y RAG"]
+    },
+    {
+      "id": "agile-scrum",
+      "years": 6,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": { "en": "Agile / Scrum", "pt": "Agile / Scrum", "es": "Agile / Scrum" },
+      "matchLabels": ["Agile / Scrum"]
+    },
+    {
+      "id": "code-review",
+      "years": 7,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": { "en": "Code review", "pt": "Code review", "es": "Code review" },
+      "matchLabels": ["Code review"]
+    },
+    {
+      "id": "cicd-practices",
+      "years": 3,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": { "en": "CI/CD", "pt": "CI/CD", "es": "CI/CD" },
+      "matchLabels": ["CI/CD"]
+    },
+    {
+      "id": "clean-architecture",
+      "years": 5,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "Clean architecture",
+        "pt": "Arquitetura limpa",
+        "es": "Arquitectura limpia"
+      },
+      "matchLabels": ["Clean architecture", "Arquitetura limpa", "Arquitectura limpia"]
+    },
+    {
+      "id": "design-patterns",
+      "years": 5,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "Software design patterns",
+        "pt": "Padrões de projeto",
+        "es": "Patrones de diseño"
+      },
+      "matchLabels": ["Software design patterns", "Padrões de projeto", "Patrones de diseño"]
+    },
+    {
+      "id": "fullstack-delivery",
+      "years": 8,
+      "proficiency": "senior",
+      "category": "engineering",
+      "labels": {
+        "en": "Full-stack delivery",
+        "pt": "Entrega full stack",
+        "es": "Entrega full stack"
+      },
+      "matchLabels": ["Full-stack delivery", "Entrega full stack"]
+    }
+  ]
+}
