@@ -207,7 +207,7 @@
     "showMore": "Ver más",
     "showLess": "Ver menos",
     "labels": {
-      "html-css": "Pure HTML / CSS / JS",
+      "html-css": "HTML / CSS / JS (Vanilla)",
       "js": "JavaScript",
       "ts": "TypeScript",
       "serverless": "Serverless",
