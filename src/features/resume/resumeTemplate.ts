@@ -219,8 +219,11 @@ function buildCertificationRows(t: TFunction, locale: ReturnType<typeof resumeOv
   return rows
 }
 
-export function buildResumeTemplate(t: TFunction): ResumePdfDocument {
-  const locale = resumeOverlayLocale(i18n.language)
+export function buildResumeTemplate(
+  t: TFunction,
+  localeOverride?: ResumeOverlayLocale,
+): ResumePdfDocument {
+  const locale = localeOverride ?? resumeOverlayLocale(i18n.language)
 
   const coreSkillsSection: ResumePdfSection = {
     title: t('resume.sectionCoreSkills'),

@@ -283,6 +283,10 @@
     ],
     "coreSkillsExtra": [
       "GenAI & RAG",
+      "LangChain",
+      "LangGraph",
+      "Fine tuning",
+      "Structured prompt engineering",
       "Microservices",
       "REST APIs",
       "Agile / Scrum",

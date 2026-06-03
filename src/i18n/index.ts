@@ -8,14 +8,19 @@ import pt from './locales/pt.json'
 const LANG_STORAGE = 'portfolio-lang'
 
 function setDocumentLang(lng: string) {
+  if (typeof document === 'undefined') return
   const map: Record<string, string> = { en: 'en', es: 'es', pt: 'pt-BR' }
   document.documentElement.lang = map[lng] ?? 'en'
 }
 
-void i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
+const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined'
+
+const i18nInit = i18n.use(initReactI18next)
+if (isBrowser) {
+  i18nInit.use(LanguageDetector)
+}
+
+void i18nInit.init({
     resources: {
       en: { translation: en },
       es: { translation: es },
